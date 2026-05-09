@@ -99,7 +99,8 @@
       "Bash(curl -sL https://api.warframestat.us/__TRACKED_VAR__)",
       "Bash(curl -s \"https://guide-warframe.vercel.app/api/wf?p=pc/sortie&language=fr\" -w \"\\\\n[code %{http_code}]\\\\n\")",
       "Bash(curl -s \"https://guide-warframe.vercel.app/api/wf?p=pc/sortie&language=fr\")",
-      "Bash(curl -sL \"https://api.warframestat.us/warframes/?language=fr\")"
+      "Bash(curl -sL \"https://api.warframestat.us/warframes/?language=fr\")",
+      "Bash(curl -s \"https://guide-warframe.vercel.app/helminth\")"
     ]
   }
 }

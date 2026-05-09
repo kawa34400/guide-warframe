@@ -6,6 +6,7 @@ import MobileNav from "@/components/MobileNav";
 import Providers from "./providers";
 import SwRegister from "@/components/SwRegister";
 import SearchPalette from "@/components/SearchPalette";
+import NotificationsManager from "@/components/NotificationsManager";
 
 const rajdhani = Rajdhani({
   subsets: ["latin"],
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
           <SearchPalette />
+          <NotificationsManager />
         </Providers>
         <SwRegister />
       </body>
