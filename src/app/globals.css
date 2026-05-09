@@ -195,6 +195,10 @@ h2 { font-weight: 500; }
   box-shadow: 0 0 6px currentColor;
 }
 
+/* Hide scrollbar visually but keep scrollable */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { scrollbar-width: none; -ms-overflow-style: none; }
+
 /* Smooth scrollbar (webkit) */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--bg-2); }
