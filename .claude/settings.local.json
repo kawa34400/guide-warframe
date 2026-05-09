@@ -136,7 +136,9 @@
       "Bash(curl -sI \"https://github.com/kawa34400/guide-warframe/releases/download/v0.2.0/Guide.Warframe.Overlay_0.2.0_x64-setup.exe\")",
       "Bash(curl -s \"https://api.github.com/repos/kawa34400/guide-warframe/releases/tags/v0.2.0\")",
       "Bash(curl -s \"https://api.github.com/repos/kawa34400/guide-warframe/actions/runs?per_page=5\")",
-      "Bash(curl -sI \"https://github.com/kawa34400/guide-warframe/releases/download/v0.3.0/Guide.Warframe.Overlay_0.3.0_x64-setup.exe\")"
+      "Bash(curl -sI \"https://github.com/kawa34400/guide-warframe/releases/download/v0.3.0/Guide.Warframe.Overlay_0.3.0_x64-setup.exe\")",
+      "Bash(curl -sI \"https://github.com/kawa34400/guide-warframe/releases/download/v0.4.0/Guide.Warframe.Overlay_0.4.0_x64-setup.exe\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://github.com/kawa34400/guide-warframe/releases/download/v0.4.0/Guide.Warframe.Overlay_0.4.0_x64-setup.exe\")"
     ]
   }
 }
