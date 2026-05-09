@@ -2,7 +2,7 @@
 // Usage: GET /api/wf/pc/sortie?language=fr → fetches https://api.warframestat.us/pc/sortie?language=fr
 import { NextRequest } from "next/server";
 
-export const revalidate = 60; // ISR-like: 60s edge cache hint
+export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 export async function GET(
@@ -10,13 +10,16 @@ export async function GET(
   ctx: { params: Promise<{ path: string[] }> },
 ) {
   const { path } = await ctx.params;
-  const search = req.nextUrl.search; // includes "?..."
+  if (!path || path.length === 0) {
+    return Response.json({ error: "missing_path" }, { status: 400 });
+  }
+  const search = req.nextUrl.search;
   const upstream = `https://api.warframestat.us/${path.join("/")}${search}`;
 
   try {
     const res = await fetch(upstream, {
       headers: { accept: "application/json" },
-      next: { revalidate: 60 },
+      cache: "no-store",
     });
     const body = await res.text();
     return new Response(body, {

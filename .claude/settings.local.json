@@ -39,7 +39,11 @@
       "Bash(git config *)",
       "Bash(git rebase *)",
       "Bash(git stash *)",
-      "Bash(git commit -m 'feat\\(ui\\): Warframe sci-fi visual redesign *)"
+      "Bash(git commit -m 'feat\\(ui\\): Warframe sci-fi visual redesign *)",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"https://guide-warframe.vercel.app/api/wf/pc/sortie?language=fr\" -UseBasicParsing -TimeoutSec 30; \"status=$\\($r.StatusCode\\) bytes=$\\($r.RawContentLength\\)\"; \\($r.Content.Substring\\(0, [Math]::Min\\(200, $r.Content.Length\\)\\)\\) } catch { \"ERR: $\\($_.Exception.Message\\)\"; if \\($_.Exception.Response\\) { $reader = New-Object System.IO.StreamReader\\($_.Exception.Response.GetResponseStream\\(\\)\\); $reader.ReadToEnd\\(\\).Substring\\(0, 300\\) } })",
+      "Bash(git ls-tree *)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/kawa34400/guide-warframe/main/src/app/api/wf/%5B...path%5D/route.ts\")",
+      "Bash(git commit -m 'fix\\(api\\): force-dynamic on warframestat proxy *)"
     ]
   }
 }
