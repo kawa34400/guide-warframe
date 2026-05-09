@@ -27,14 +27,14 @@ export default function Nav() {
         >
           ⟁ WARFRAME
         </Link>
-        <nav className="flex-1 flex items-center gap-1 overflow-x-auto scrollbar-thin">
+        <nav className="flex-1 flex items-center gap-0.5 overflow-x-auto scrollbar-hide">
           {links.map((l) => {
             const active = path === l.href;
             return (
               <Link
                 key={l.href}
                 href={l.href}
-                className={`relative px-3 py-1.5 rounded-md text-sm whitespace-nowrap font-display tracking-wider uppercase transition ${
+                className={`relative px-2.5 py-1.5 rounded-md text-xs whitespace-nowrap font-display tracking-[0.08em] uppercase transition ${
                   active
                     ? "text-accent text-glow bg-accent/5"
                     : "text-muted hover:text-text"
