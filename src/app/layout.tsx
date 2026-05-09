@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Rajdhani, Orbitron } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
+import MobileNav from "@/components/MobileNav";
 import Providers from "./providers";
 import SwRegister from "@/components/SwRegister";
 import SearchPalette from "@/components/SearchPalette";
@@ -56,7 +57,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen bg-bg text-text">
         <Providers>
           <Nav />
-          <main className="max-w-6xl mx-auto px-4 py-6">{children}</main>
+          <MobileNav />
+          <main className="max-w-6xl mx-auto px-4 py-6 pb-24 md:pb-6">
+            {children}
+          </main>
           <SearchPalette />
         </Providers>
         <SwRegister />

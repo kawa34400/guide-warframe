@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { flatCatalog } from "@/lib/catalog";
+import { onOpenSearch } from "@/lib/search-bus";
 
 export default function SearchPalette() {
   const [open, setOpen] = useState(false);
@@ -22,7 +23,11 @@ export default function SearchPalette() {
       }
     };
     document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
+    const off = onOpenSearch(() => setOpen(true));
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      off();
+    };
   }, [open]);
 
   useEffect(() => {
