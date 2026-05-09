@@ -73,7 +73,10 @@ function WeaponCheck({
           />
           <span className="text-sm font-medium truncate">{name}</span>
         </div>
-        <SourceTag src={source} />
+        <div className="flex items-center gap-1.5 flex-wrap">
+          <SourceTag src={source} />
+          <MarketBadge name={name} />
+        </div>
       </button>
       <NoteButton
         itemId={id}

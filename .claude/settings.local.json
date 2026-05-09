@@ -57,7 +57,8 @@
       "Bash(curl -s \"https://guide-warframe.vercel.app/api/wf?p=pc/arbitration&language=fr\")",
       "Bash(git commit -m 'fix\\(live\\): show empty state for arbitration placeholder *)",
       "Bash(git commit -m 'feat\\(notes\\): notes per item with Supabase sync *)",
-      "Bash(git commit -m 'feat\\(market\\): warframe.market price lookup *)"
+      "Bash(git commit -m 'feat\\(market\\): warframe.market price lookup *)",
+      "Bash(git commit *)"
     ]
   }
 }
