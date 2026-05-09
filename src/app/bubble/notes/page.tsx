@@ -29,7 +29,7 @@ export default function NotesBubble() {
   }, [text, loaded]);
 
   return (
-    <BubbleShell title="Notes" icon="📝">
+    <BubbleShell>
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
@@ -49,22 +49,20 @@ export default function NotesBubble() {
           minHeight: 100,
         }}
       />
-      <div
-        style={{
-          fontSize: 9,
-          color: "rgba(125,143,166,0.5)",
-          marginTop: 2,
-          textAlign: "right",
-        }}
-      >
-        {savedAt
-          ? `sauvegardé ${new Date(savedAt).toLocaleTimeString("fr-FR", {
-              hour: "2-digit",
-              minute: "2-digit",
-              second: "2-digit",
-            })}`
-          : ""}
-      </div>
+      {savedAt && (
+        <div
+          style={{
+            fontSize: 8,
+            color: "rgba(125,143,166,0.4)",
+            position: "absolute",
+            right: 4,
+            bottom: 2,
+            pointerEvents: "none",
+          }}
+        >
+          ●
+        </div>
+      )}
     </BubbleShell>
   );
 }

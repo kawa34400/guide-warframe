@@ -2,22 +2,14 @@
 import { type ReactNode } from "react";
 
 export default function BubbleShell({
-  title,
-  icon,
   children,
 }: {
-  title: string;
-  icon?: string;
   children: ReactNode;
 }) {
   return (
     <div className="bubble">
-      <div className="bubble-header" data-tauri-drag-region>
-        <span className="bubble-icon">{icon}</span>
-        <span className="bubble-title">{title}</span>
-        <span className="bubble-dots">⋯</span>
-      </div>
-      <div className="bubble-body">{children}</div>
+      <div className="drag" data-tauri-drag-region />
+      <div className="body">{children}</div>
 
       <style jsx global>{`
         :root {
@@ -26,74 +18,67 @@ export default function BubbleShell({
           --accent-2: #7be0c2;
           --accent-3: #b591ff;
         }
+        html, body, #__next { background: transparent; margin: 0; padding: 0; }
         .bubble {
-          margin: 4px;
+          margin: 3px;
           background: rgba(11, 15, 20, 0.78);
           backdrop-filter: blur(8px);
-          border: 1px solid rgba(95, 210, 255, 0.22);
-          border-radius: 10px;
+          border: 1px solid rgba(95, 210, 255, 0.18);
+          border-radius: 8px;
           box-shadow:
-            0 0 0 1px rgba(0, 0, 0, 0.4),
-            0 4px 18px rgba(0, 0, 0, 0.35),
-            0 0 14px rgba(95, 210, 255, 0.06);
+            0 0 0 1px rgba(0, 0, 0, 0.35),
+            0 4px 14px rgba(0, 0, 0, 0.3);
           overflow: hidden;
-          font-size: 12px;
+          font-size: 11px;
           color: #e6edf5;
-          width: calc(100vw - 8px);
-          height: calc(100vh - 8px);
+          width: calc(100vw - 6px);
+          height: calc(100vh - 6px);
           display: flex;
           flex-direction: column;
         }
-        .bubble-header {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          padding: 5px 8px;
-          background: rgba(0, 0, 0, 0.25);
-          border-bottom: 1px solid rgba(95, 210, 255, 0.12);
+        .drag {
+          height: 6px;
           cursor: grab;
-          user-select: none;
+          background: linear-gradient(
+            to bottom,
+            rgba(95, 210, 255, 0.06),
+            transparent
+          );
         }
-        .bubble-header:active { cursor: grabbing; }
-        .bubble-icon { font-size: 11px; }
-        .bubble-title {
+        .drag:hover {
+          background: linear-gradient(
+            to bottom,
+            rgba(95, 210, 255, 0.18),
+            transparent
+          );
+        }
+        .drag:active { cursor: grabbing; }
+        .body {
           flex: 1;
-          font-size: 10px;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: var(--accent);
-          opacity: 0.85;
-        }
-        .bubble-dots {
-          color: rgba(125, 143, 166, 0.4);
-          letter-spacing: 2px;
-          font-size: 11px;
-        }
-        .bubble-body {
-          flex: 1;
-          padding: 6px 8px 8px 8px;
+          padding: 4px 8px 6px 8px;
           overflow: auto;
+          min-height: 0;
         }
         .bubble-row {
           display: flex;
           align-items: baseline;
           gap: 6px;
-          padding: 2px 0;
+          padding: 1px 0;
           font-size: 11px;
-          line-height: 1.3;
+          line-height: 1.25;
+          font-family: ui-monospace, "JetBrains Mono", monospace;
         }
         .bubble-row .label {
           color: var(--muted);
-          width: 56px;
-          font-size: 10px;
+          width: 50px;
+          font-size: 9px;
           text-transform: uppercase;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.08em;
           flex-shrink: 0;
         }
         .bubble-row .value { flex: 1; }
         .bubble-row .timer {
           color: rgba(125, 143, 166, 0.7);
-          font-family: ui-monospace, monospace;
           font-size: 10px;
         }
       `}</style>

@@ -42,7 +42,7 @@ export default function MissionsBubble() {
   const tierOrder = ["Lith", "Meso", "Neo", "Axi", "Requiem", "Omnia"];
 
   return (
-    <BubbleShell title="Missions" icon="🎯">
+    <BubbleShell>
       {sortie.data && (
         <div className="bubble-row">
           <span className="label">Sortie</span>

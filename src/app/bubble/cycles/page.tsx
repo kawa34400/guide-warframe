@@ -43,7 +43,7 @@ function CycleRow({ id, label, icons }: { id: string; label: string; icons: Reco
 
 export default function CyclesBubble() {
   return (
-    <BubbleShell title="Mondes" icon="🌍">
+    <BubbleShell>
       {CYCLES.map((c) => (
         <CycleRow key={c.id} {...c} />
       ))}
