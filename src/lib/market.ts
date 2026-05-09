@@ -69,13 +69,13 @@ async function loadSlugSet(): Promise<Set<string>> {
     return slugListCache.slugs;
   }
   try {
-    const r = await fetch("/api/market?p=v1/items");
+    const r = await fetch("/api/market?p=v2/items");
     if (!r.ok) throw new Error(`items list ${r.status}`);
     const j = await r.json();
-    // payload: { payload: { items: [{ url_name, item_name }] } }
-    const items = j?.payload?.items ?? [];
+    // v2 payload: { data: [{ slug, i18n: { en: { name } } }] }
+    const items = j?.data ?? [];
     const set = new Set<string>(
-      items.map((it: { url_name: string }) => it.url_name).filter(Boolean),
+      items.map((it: { slug: string }) => it.slug).filter(Boolean),
     );
     slugListCache.slugs = set;
     slugListCache.loadedAt = Date.now();

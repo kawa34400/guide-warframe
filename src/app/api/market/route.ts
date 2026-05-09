@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 // Whitelist: only allow read paths under v1/items
-const ALLOWED = /^v1\/items(?:\/[a-z0-9_]+(?:\/(?:orders|statistics))?)?$/;
+const ALLOWED = /^v[12]\/items(?:\/[a-z0-9_]+(?:\/(?:orders|statistics))?)?$/;
 
 export async function GET(req: NextRequest) {
   const p = req.nextUrl.searchParams.get("p");
