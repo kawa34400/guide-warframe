@@ -47,23 +47,33 @@ function parseConstruction() {
 
   const result = { Principales: [], Secondaires: [], "Mélée": [] };
 
+  // Skip legend rows (the source code reference table) — only keep rows where
+  // the FALSE/TRUE flag is present at the section's offset, which marks an
+  // actual data row.
+  const isDataFlag = (v) => v === "FALSE" || v === "TRUE";
+
   for (let i = 7; i < rows.length; i++) {
     const row = rows[i];
     if (!row || row.length < 10) continue;
 
     for (const sec of sections) {
       const o = sec.offset;
+      const resFlag = (row[o] || "").trim();
       const resName = (row[o + 1] || "").trim();
       const resSrc = (row[o + 3] || "").trim();
+      const builtFlag = (row[o + 5] || "").trim();
       const builtName = (row[o + 6] || "").trim();
       const builtSrc = (row[o + 8] || "").trim();
-      if (!resName && !builtName) continue;
+
+      const resOk = resName && isDataFlag(resFlag);
+      const builtOk = builtName && isDataFlag(builtFlag);
+      if (!resOk && !builtOk) continue;
 
       result[sec.name].push({
-        resource: resName
+        resource: resOk
           ? { name: resName, source: SOURCES[resSrc] || resSrc || null }
           : null,
-        built: builtName
+        built: builtOk
           ? { name: builtName, source: SOURCES[builtSrc] || builtSrc || null }
           : null,
       });

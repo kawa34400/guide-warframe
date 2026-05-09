@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "parse": "node scripts/parse-csv.mjs",
+    "recipes": "node scripts/fetch-recipes.mjs",
     "icons": "node scripts/gen-icons.mjs",
     "icons:tauri": "node scripts/gen-tauri-icons.mjs",
     "tauri": "tauri"

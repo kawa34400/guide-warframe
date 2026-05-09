@@ -2,650 +2,549 @@
   "Principales": [
     {
       "resource": {
-        "name": "Boltor",
-        "source": "Marché"
+        "name": "Cernos",
+        "source": null
       },
       "built": {
-        "name": "Boltace (Mélée)",
-        "source": "Marché"
+        "name": "Cernos Mutaliste",
+        "source": null
       }
     },
     {
       "resource": {
-        "name": "Kronen (Mélée)",
-        "source": "Marché"
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Drakgoon",
-        "source": "Marché"
+        "name": "Cernos Mutaliste",
+        "source": null
       },
       "built": {
-        "name": "Zarr",
-        "source": "Marché"
+        "name": "Cernos Proboscis",
+        "source": null
       }
     },
     {
       "resource": {
-        "name": "Grataka",
-        "source": "Marché"
+        "name": "Hikou",
+        "source": null
       },
       "built": {
-        "name": "Grataka Jumeaux (Secondaire)",
-        "source": "Marché"
+        "name": "Panthera",
+        "source": null
       }
     },
     {
       "resource": {
-        "name": "Grataka",
-        "source": "Marché"
+        "name": "Miter",
+        "source": null
       },
-      "built": null
+      "built": {
+        "name": "Panthera",
+        "source": null
+      }
     },
     {
       "resource": {
         "name": "Latron",
-        "source": "Marché"
+        "source": null
       },
       "built": {
         "name": "Tiberon",
-        "source": "Marché"
+        "source": null
       }
     },
     {
       "resource": {
-        "name": "Miter",
-        "source": "Boss"
+        "name": "Drakgoon",
+        "source": null
       },
       "built": {
-        "name": "Panthera",
-        "source": "Marché"
+        "name": "Zarr",
+        "source": null
       }
-    },
-    {
-      "resource": {
-        "name": "Hikou (Secondaire)",
-        "source": "Marché"
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Cernos",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Cernos Mutualiste",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Cernos Mutualiste",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Cernos Proboscis",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Acquisition",
-        "source": null
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Marché",
-        "source": "="
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Dojo",
-        "source": "="
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Boss",
-        "source": "="
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Drop en Mission",
-        "source": "="
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Céphalon Simaris",
-        "source": "="
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Quêtes",
-        "source": "="
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Kohmak Jumeaux",
-        "source": null
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Miter",
-        "source": null
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Paracesis",
-        "source": null
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "War Brisé",
-        "source": null
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "War",
-        "source": null
-      },
-      "built": null
     }
   ],
   "Secondaires": [
     {
       "resource": {
-        "name": "Akbolto",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Akjagara",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Doubles Skanas (Mélée)",
-        "source": "Marché"
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Akstileto",
-        "source": "Dojo"
-      },
-      "built": {
-        "name": "Aksomati",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Akstileto",
-        "source": "Dojo"
-      },
-      "built": {
-        "name": "Sarpa (Mélée)",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Atomos",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Basolk Jumeaux (Mélée)",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Doubles Zorens (Mélée)",
-        "source": "Marché"
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Bolto",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Akbolto",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Bolto",
-        "source": "Marché"
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Bolto",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Hystrix",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Viper",
-        "source": "Marché"
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Bronco",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Akbronco",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Bronco",
-        "source": "Marché"
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Cestra",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Doubles Cestras",
-        "source": "Dojo"
-      }
-    },
-    {
-      "resource": {
-        "name": "Cestra",
-        "source": "Marché"
-      },
-      "built": null
-    },
-    {
-      "resource": {
         "name": "Furis",
-        "source": "Marché"
+        "source": null
       },
       "built": {
         "name": "Afuris",
-        "source": "Marché"
+        "source": null
       }
     },
     {
       "resource": {
-        "name": "Furis",
-        "source": "Marché"
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Gammacor",
-        "source": "Dojo"
-      },
-      "built": {
-        "name": "Héliocor (Mélée)",
-        "source": "Céphalon Simaris"
-      }
-    },
-    {
-      "resource": {
-        "name": "Kohmak",
-        "source": "Dojo"
-      },
-      "built": {
-        "name": "Kohmak Jumeaux",
-        "source": "Boss"
-      }
-    },
-    {
-      "resource": {
-        "name": "Kohmak",
-        "source": "Dojo"
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Kraken",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Kulstar",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Kunai",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Tipedo (Mélée)",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Bo (Mélée)",
-        "source": "Marché"
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Lato",
-        "source": "Marché"
-      },
-      "built": {
         "name": "Bolto",
-        "source": "Marché"
+        "source": null
+      },
+      "built": {
+        "name": "Akbolto",
+        "source": null
       }
     },
     {
       "resource": {
-        "name": "Lex",
-        "source": "Marché"
+        "name": "Bronco Prime",
+        "source": null
       },
       "built": {
-        "name": "Aklex",
-        "source": "Marché"
+        "name": "Akbronco Prime",
+        "source": null
       }
     },
     {
       "resource": {
-        "name": "Lex",
-        "source": "Marché"
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Magnus",
-        "source": "Marché"
+        "name": "Bronco",
+        "source": null
       },
       "built": {
-        "name": "Akmagnus",
-        "source": "Marché"
+        "name": "Akbronco",
+        "source": null
       }
     },
     {
       "resource": {
-        "name": "Magnus",
-        "source": "Marché"
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Vasto",
-        "source": "Marché"
+        "name": "Akbolto",
+        "source": null
       },
       "built": {
-        "name": "Akvasto",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Vasto",
-        "source": "Marché"
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Vasto",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Redeemer (Mélée)",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Doubles Skanas (Mélée)",
-        "source": "Marché"
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Viper",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Vipers Jumeaux",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Viper",
-        "source": "Marché"
-      },
-      "built": null
-    }
-  ],
-  "Mélée": [
-    {
-      "resource": {
-        "name": "Amphis",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Sydon",
-        "source": "Dojo"
-      }
-    },
-    {
-      "resource": {
-        "name": "Ankyros",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Tekko",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Ankyros",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Ripkas",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Doubles Hachoirs",
-        "source": "Marché"
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Bo",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Cedus",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "War Brisé",
-        "source": "Boss"
-      },
-      "built": {
-        "name": "War",
-        "source": "Boss"
-      }
-    },
-    {
-      "resource": {
-        "name": "Doubles Kamas",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Doubles Razas",
-        "source": "Dojo"
+        "name": "Akjagara",
+        "source": null
       }
     },
     {
       "resource": {
         "name": "Doubles Skanas",
-        "source": "Marché"
+        "source": null
       },
       "built": {
-        "name": "Epée Versatiles Sombres",
-        "source": "Dojo"
+        "name": "Akjagara",
+        "source": null
       }
     },
     {
       "resource": {
-        "name": "Furax",
-        "source": "Marché"
+        "name": "Lex Prime",
+        "source": null
       },
       "built": {
-        "name": "Knux (Arch-Mélée)",
-        "source": "Dojo"
+        "name": "Aklex Prime",
+        "source": null
       }
     },
     {
       "resource": {
-        "name": "Galatine",
-        "source": "Marché"
+        "name": "Lex",
+        "source": null
       },
       "built": {
-        "name": "Paracesis",
-        "source": "Quête"
+        "name": "Aklex",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Magnus Prime",
+        "source": null
+      },
+      "built": {
+        "name": "Akmagnus Prime",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Magnus",
+        "source": null
+      },
+      "built": {
+        "name": "Akmagnus",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Akstiletto",
+        "source": null
+      },
+      "built": {
+        "name": "Aksomati",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Vasto Prime",
+        "source": null
+      },
+      "built": {
+        "name": "Akvasto Prime",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Vasto",
+        "source": null
+      },
+      "built": {
+        "name": "Akvasto",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Lato",
+        "source": null
+      },
+      "built": {
+        "name": "Bolto",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Cestra",
+        "source": null
+      },
+      "built": {
+        "name": "Doubles Cestras",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Grakata",
+        "source": null
+      },
+      "built": {
+        "name": "Grakatas Jumeaux",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Bolto",
+        "source": null
+      },
+      "built": {
+        "name": "Hystrix",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Viper",
+        "source": null
+      },
+      "built": {
+        "name": "Hystrix",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Kohmak",
+        "source": null
+      },
+      "built": {
+        "name": "Kohmaks Jumeaux",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Kraken",
+        "source": null
+      },
+      "built": {
+        "name": "Kulstar",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Viper",
+        "source": null
+      },
+      "built": {
+        "name": "Vipers Jumeaux",
+        "source": null
+      }
+    }
+  ],
+  "Mélée": [
+    {
+      "resource": {
+        "name": "Atomos",
+        "source": null
+      },
+      "built": {
+        "name": "Basolk Jumeaux",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Doubles Zorens",
+        "source": null
+      },
+      "built": {
+        "name": "Basolk Jumeaux",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Boltor",
+        "source": null
+      },
+      "built": {
+        "name": "Boltace",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Kronen",
+        "source": null
+      },
+      "built": {
+        "name": "Boltace",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Bo",
+        "source": null
+      },
+      "built": {
+        "name": "Cadus",
+        "source": null
       }
     },
     {
       "resource": {
         "name": "Kama",
-        "source": "Marché"
+        "source": null
       },
       "built": {
         "name": "Doubles Kamas",
-        "source": "Marché"
+        "source": null
       }
     },
     {
       "resource": {
-        "name": "Kama",
-        "source": "Marché"
+        "name": "Doubles Kamas",
+        "source": null
       },
-      "built": null
+      "built": {
+        "name": "Doubles Razas",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Doubles Skanas",
+        "source": null
+      },
+      "built": {
+        "name": "Épées Versatiles Sombres",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Gammacor",
+        "source": null
+      },
+      "built": {
+        "name": "Heliocor",
+        "source": null
+      }
     },
     {
       "resource": {
         "name": "Kogake",
-        "source": "Marché"
+        "source": null
       },
       "built": {
         "name": "Hirudo",
-        "source": "Marché"
+        "source": null
       }
     },
     {
       "resource": {
         "name": "Krohkur",
-        "source": "Marché"
+        "source": null
       },
       "built": {
         "name": "Krohkur Jumeaux",
-        "source": "Dojo"
-      }
-    },
-    {
-      "resource": {
-        "name": "Krohkur",
-        "source": "Marché"
-      },
-      "built": null
-    },
-    {
-      "resource": {
-        "name": "Magistar",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Sibear",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Nikana",
-        "source": "Dojo"
-      },
-      "built": {
-        "name": "Nikana Dragon",
-        "source": "Marché"
-      }
-    },
-    {
-      "resource": {
-        "name": "Ninkondi",
-        "source": "Marché"
-      },
-      "built": {
-        "name": "Shaku",
-        "source": "Dojo"
+        "source": null
       }
     },
     {
       "resource": {
         "name": "Tipedo",
-        "source": "Marché"
+        "source": null
       },
       "built": {
         "name": "Lesion",
-        "source": "Marché"
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Nikana",
+        "source": null
+      },
+      "built": {
+        "name": "Nikana Dragon",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Galatine",
+        "source": null
+      },
+      "built": {
+        "name": "Paracesis",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Doubles Skanas",
+        "source": null
+      },
+      "built": {
+        "name": "Redeemer",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Vasto",
+        "source": null
+      },
+      "built": {
+        "name": "Redeemer",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Ankyros",
+        "source": null
+      },
+      "built": {
+        "name": "Ripkas",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Doubles Hachoirs",
+        "source": null
+      },
+      "built": {
+        "name": "Ripkas",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Akstiletto",
+        "source": null
+      },
+      "built": {
+        "name": "Sarpa",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Ninkondi",
+        "source": null
+      },
+      "built": {
+        "name": "Shaku",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Magistar",
+        "source": null
+      },
+      "built": {
+        "name": "Sibear",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Amphis",
+        "source": null
+      },
+      "built": {
+        "name": "Sydon",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Ankyros",
+        "source": null
+      },
+      "built": {
+        "name": "Tekko",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Bo",
+        "source": null
+      },
+      "built": {
+        "name": "Tipedo",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "Kunai",
+        "source": null
+      },
+      "built": {
+        "name": "Tipedo",
+        "source": null
+      }
+    },
+    {
+      "resource": {
+        "name": "War Brisée",
+        "source": null
+      },
+      "built": {
+        "name": "War",
+        "source": null
+      }
+    }
+  ],
+  "Arch-Gun": [],
+  "Arch-Mélée": [
+    {
+      "resource": {
+        "name": "Furax",
+        "source": null
+      },
+      "built": {
+        "name": "<ARCHWING> Knux",
+        "source": null
       }
     }
   ]

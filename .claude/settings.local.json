@@ -108,7 +108,12 @@
       "Bash(curl -s \"https://guide-warframe.vercel.app/api/lich-weapons\")",
       "Bash(curl -sL \"https://api.warframestat.us/weapons/?language=fr\" -w \"\\\\n[size %{size_download} status %{http_code}]\\\\n\" -o /tmp/w.json)",
       "Bash(curl -sL \"https://api.warframestat.us/weapons/?language=fr\")",
-      "Bash(node scripts/gen-tauri-icons.mjs)"
+      "Bash(node scripts/gen-tauri-icons.mjs)",
+      "Bash(git tag *)",
+      "Bash(curl -s -o /dev/null -w \"releases page: %{http_code}\\\\n\" \"https://github.com/kawa34400/guide-warframe/releases\")",
+      "Bash(curl -s \"https://api.github.com/repos/kawa34400/guide-warframe/releases\")",
+      "Bash(curl -s \"https://api.github.com/repos/kawa34400/guide-warframe/actions/runs?per_page=3\")",
+      "Bash(node scripts/fetch-recipes.mjs)"
     ]
   }
 }
