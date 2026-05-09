@@ -1,5 +1,5 @@
 // Minimal service worker: stale-while-revalidate for navigations, network-first for API.
-const VERSION = "v1";
+const VERSION = "v2";
 const STATIC_CACHE = `wf-static-${VERSION}`;
 const RUNTIME_CACHE = `wf-runtime-${VERSION}`;
 
@@ -45,6 +45,10 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
+
+  // Skip /api/market entirely — let the browser handle it directly to avoid
+  // SW serving stale 404s and to keep the large items catalog fresh.
+  if (url.pathname.startsWith("/api/market")) return;
 
   // API: network first, fallback to cache (so live data when online, stale when offline)
   if (url.pathname.startsWith("/api/")) {

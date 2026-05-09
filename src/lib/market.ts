@@ -64,12 +64,22 @@ export function candidateSlugs(name: string): string[] {
 
 // Fetches the full slug catalog once (so we can know if a given slug exists before
 // asking for stats — avoids 404 spam).
+async function fetchWithTimeout(input: string, ms = 15000): Promise<Response> {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), ms);
+  try {
+    return await fetch(input, { signal: ctrl.signal, cache: "default" });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function loadSlugSet(): Promise<Set<string>> {
   if (slugListCache.slugs && Date.now() - slugListCache.loadedAt < 24 * 3600 * 1000) {
     return slugListCache.slugs;
   }
   try {
-    const r = await fetch("/api/market?p=v2/items");
+    const r = await fetchWithTimeout("/api/market?p=v2/items");
     if (!r.ok) throw new Error(`items list ${r.status}`);
     const j = await r.json();
     // v2 payload: { data: [{ slug, i18n: { en: { name } } }] }
@@ -92,7 +102,9 @@ async function fetchStats(slug: string): Promise<MarketStats | null> {
   if (cached && Date.now() - cached.ts < CACHE_MS) return cached.data;
 
   try {
-    const r = await fetch(`/api/market?p=v1/items/${encodeURIComponent(slug)}/statistics`);
+    const r = await fetchWithTimeout(
+      `/api/market?p=v1/items/${encodeURIComponent(slug)}/statistics`,
+    );
     if (!r.ok) {
       statsCache.set(slug, { ts: Date.now(), data: null });
       return null;
