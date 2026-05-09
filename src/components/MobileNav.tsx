@@ -117,6 +117,7 @@ function Drawer({
     { href: "/construction", label: "Construction" },
     { href: "/incarnon", label: "Incarnon" },
     { href: "/warframes", label: "Warframes" },
+    { href: "/mastery", label: "Mastery Rank" },
     { href: "/team", label: "Équipe" },
     { href: "/settings", label: "Paramètres" },
   ];

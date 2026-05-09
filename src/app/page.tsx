@@ -176,6 +176,13 @@ export default function Home() {
             desc="Évolutions + rotation hebdo"
           />
           <SectionTile
+            href="/mastery"
+            title="Mastery"
+            desc="~700 items + MR potentiel"
+            badge="MR"
+            accent
+          />
+          <SectionTile
             href="/settings"
             title="Paramètres"
             desc="Sauvegarde / Import"
