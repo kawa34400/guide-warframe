@@ -45,7 +45,15 @@
       "Bash(curl -s \"https://raw.githubusercontent.com/kawa34400/guide-warframe/main/src/app/api/wf/%5B...path%5D/route.ts\")",
       "Bash(git commit -m 'fix\\(api\\): force-dynamic on warframestat proxy *)",
       "Bash(curl -s -o /dev/null -w \"now: %{http_code}\\\\n\" \"https://guide-warframe.vercel.app/api/wf/pc/sortie?language=fr\")",
-      "Bash(git commit -m 'fix\\(api\\): replace catch-all route with query param proxy *)"
+      "Bash(git commit -m 'fix\\(api\\): replace catch-all route with query param proxy *)",
+      "Bash(curl -s -o /dev/null -w \"now: %{http_code}\\\\n\" \"https://guide-warframe.vercel.app/api/wf?p=pc/sortie&language=fr\")",
+      "Bash(curl -sI \"https://api.warframestat.us/pc/sortie?language=fr\")",
+      "Bash(curl -s \"https://guide-warframe.vercel.app/api/wf?p=pc%2Fsortie&language=fr\")",
+      "Bash(curl -sIL \"https://api.warframestat.us/pc/sortie?language=fr\")",
+      "Bash(curl -s \"https://api.warframestat.us/pc/sortie?language=fr\")",
+      "Bash(curl -s \"https://api.warframestat.us/pc/sortie/?language=fr\")",
+      "Bash(curl -s \"https://api.warframestat.us/pc/?language=fr\")",
+      "Bash(git commit -m 'feat: Phase 1 — Today page, stats, search, export/import, Live++ *)"
     ]
   }
 }

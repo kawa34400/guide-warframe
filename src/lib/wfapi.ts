@@ -50,6 +50,50 @@ export type SteelPath = {
   evergreens?: { name: string; cost: number }[];
 };
 
+export type Invasion = {
+  id: string;
+  node: string;
+  desc?: string;
+  attacker: { faction: string; reward?: { asString?: string } };
+  defender: { faction: string; reward?: { asString?: string } };
+  completion: number;
+  completed: boolean;
+  eta: string;
+};
+
+export type WfEvent = {
+  id: string;
+  description?: string;
+  tooltip?: string;
+  node?: string;
+  expiry: string;
+  rewards?: { asString?: string }[];
+  health?: number;
+  affiliatedWith?: string;
+};
+
+export type Arbitration = {
+  activation: string;
+  expiry: string;
+  enemy: string;
+  type: string;
+  node: string;
+  archwing?: boolean;
+  eidolon?: boolean;
+};
+
+export type CalendarDay = {
+  day: number;
+  events: { type: string; reward?: string; challenge?: { title: string } }[];
+};
+
+export type Calendar = {
+  expiry: string;
+  yearIteration?: number;
+  season?: string;
+  days?: CalendarDay[];
+};
+
 export type Cycle = {
   state: string;
   expiry: string;

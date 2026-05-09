@@ -4,6 +4,7 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import Providers from "./providers";
 import SwRegister from "@/components/SwRegister";
+import SearchPalette from "@/components/SearchPalette";
 
 const rajdhani = Rajdhani({
   subsets: ["latin"],
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <Nav />
           <main className="max-w-6xl mx-auto px-4 py-6">{children}</main>
+          <SearchPalette />
         </Providers>
         <SwRegister />
       </body>

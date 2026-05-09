@@ -5,6 +5,7 @@ import AuthBar from "./AuthBar";
 
 const links = [
   { href: "/", label: "Accueil" },
+  { href: "/today", label: "Aujourd'hui" },
   { href: "/construction", label: "Construction" },
   { href: "/incarnon", label: "Incarnon" },
   { href: "/warframes", label: "Warframes" },
@@ -44,6 +45,18 @@ export default function Nav() {
             );
           })}
         </nav>
+        <Link
+          href="/settings"
+          className={`shrink-0 px-2 py-1 rounded transition text-base ${
+            path === "/settings"
+              ? "text-accent"
+              : "text-muted hover:text-text hover:bg-panel-2"
+          }`}
+          aria-label="Paramètres"
+          title="Paramètres"
+        >
+          ⚙
+        </Link>
         <div className="shrink-0">
           <AuthBar />
         </div>

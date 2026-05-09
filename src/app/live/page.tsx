@@ -10,6 +10,10 @@ import {
   type SteelPath,
   type Nightwave,
   type Cycle,
+  type Invasion,
+  type WfEvent,
+  type Arbitration,
+  type Calendar,
 } from "@/lib/wfapi";
 
 const CYCLE_DEFS: {
@@ -436,6 +440,146 @@ function NightwaveCard() {
   );
 }
 
+function InvasionsCard() {
+  const { data, loading, error } = useWfData<Invasion[]>("invasions");
+  if (loading) return <Card title="Invasions">…</Card>;
+  if (error || !data) return <Card title="Invasions">indisponible</Card>;
+  const active = data.filter((i) => !i.completed);
+  if (active.length === 0)
+    return (
+      <Card title="Invasions">
+        <div className="text-sm text-muted">Aucune invasion en cours</div>
+      </Card>
+    );
+  return (
+    <Card title={`Invasions (${active.length})`}>
+      <ul className="space-y-2 text-sm">
+        {active.slice(0, 6).map((inv) => {
+          const aFaction = FACTION_COLORS[inv.attacker.faction] ?? "text-muted";
+          const dFaction = FACTION_COLORS[inv.defender.faction] ?? "text-muted";
+          const pct = Math.round((inv.completion + 100) / 2);
+          return (
+            <li
+              key={inv.id}
+              className="bg-panel-2/50 rounded px-2 py-1.5"
+            >
+              <div className="flex items-center justify-between text-xs mb-1">
+                <span className={aFaction}>{inv.attacker.faction}</span>
+                <span className="text-muted">{inv.node}</span>
+                <span className={dFaction}>{inv.defender.faction}</span>
+              </div>
+              <div className="h-1.5 bg-panel-2 rounded overflow-hidden flex">
+                <div
+                  className="bg-faction-grineer/60"
+                  style={{ width: `${pct}%` }}
+                />
+                <div
+                  className="bg-faction-corpus/60"
+                  style={{ width: `${100 - pct}%` }}
+                />
+              </div>
+              <div className="text-xs text-muted mt-1 truncate">
+                {inv.attacker.reward?.asString || "—"} vs{" "}
+                {inv.defender.reward?.asString || "—"}
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </Card>
+  );
+}
+
+function ArbitrationCard() {
+  const { data, loading, error } = useWfData<Arbitration>("arbitration");
+  const now = useNow();
+  if (loading) return <Card title="Arbitration">…</Card>;
+  if (error || !data) return <Card title="Arbitration">indisponible</Card>;
+  const factionCls = FACTION_COLORS[data.enemy] ?? "text-muted";
+  return (
+    <Card title="Arbitration" expires={timeLeft(data.expiry, now)}>
+      <div className="text-sm">
+        <div className="flex items-center justify-between">
+          <span className="text-accent font-medium">{data.type}</span>
+          <span className={`text-xs ${factionCls}`}>{data.enemy}</span>
+        </div>
+        <div className="text-xs text-muted mt-1">{data.node}</div>
+        {(data.archwing || data.eidolon) && (
+          <div className="text-xs text-warning mt-1 tracking-wider uppercase">
+            {data.archwing ? "★ Archwing" : "★ Eidolon"}
+          </div>
+        )}
+      </div>
+    </Card>
+  );
+}
+
+function EventsCard() {
+  const { data, loading, error } = useWfData<WfEvent[]>("events");
+  const now = useNow();
+  if (loading) return <Card title="Events">…</Card>;
+  if (error || !data || data.length === 0)
+    return (
+      <Card title="Events">
+        <div className="text-sm text-muted">Aucun event en cours</div>
+      </Card>
+    );
+  return (
+    <Card title={`Events (${data.length})`}>
+      <ul className="space-y-2 text-sm">
+        {data.slice(0, 5).map((e) => (
+          <li key={e.id} className="bg-panel-2/50 rounded px-2 py-1.5">
+            <div className="flex items-center justify-between">
+              <span className="text-accent font-medium truncate">
+                {e.description || e.tooltip || "Event"}
+              </span>
+              {e.expiry && (
+                <span className="text-xs text-muted tabular-nums shrink-0 ml-2">
+                  {timeLeft(e.expiry, now)}
+                </span>
+              )}
+            </div>
+            {e.node && (
+              <div className="text-xs text-muted mt-0.5">{e.node}</div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </Card>
+  );
+}
+
+function CalendarCard() {
+  const { data, loading, error } = useWfData<Calendar>("duviriCycle/calendar");
+  const now = useNow();
+  if (loading) return <Card title="Calendrier 1999">…</Card>;
+  if (error || !data || !data.days) {
+    // Fallback to /1999/calendar if duviri sub-path doesn't exist
+    return null;
+  }
+  return (
+    <Card title="Calendrier 1999" expires={timeLeft(data.expiry, now)}>
+      <ul className="space-y-1 text-sm">
+        {data.days.slice(0, 7).map((d, i) => (
+          <li
+            key={i}
+            className="flex items-center gap-2 bg-panel-2/50 rounded px-2 py-1"
+          >
+            <span className="font-display tracking-wider text-muted text-xs w-12 shrink-0">
+              Jour {d.day}
+            </span>
+            <span className="flex-1 truncate">
+              {d.events
+                .map((ev) => ev.reward || ev.challenge?.title || ev.type)
+                .join(" · ")}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </Card>
+  );
+}
+
 export default function LivePage() {
   return (
     <div className="space-y-4">
@@ -449,8 +593,11 @@ export default function LivePage() {
         <CyclesCard />
         <SortieCard />
         <ArchonCard />
+        <ArbitrationCard />
         <SteelPathCard />
         <NightwaveCard />
+        <InvasionsCard />
+        <EventsCard />
         <FissuresCard />
         <BaroCard />
       </div>
