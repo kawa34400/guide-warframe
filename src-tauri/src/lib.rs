@@ -11,14 +11,6 @@ fn toggle_visibility(window: &WebviewWindow) {
     }
 }
 
-fn toggle_click_through(window: &WebviewWindow, state: &ClickThroughState) {
-    let mut current = state.0.lock().unwrap();
-    *current = !*current;
-    let _ = window.set_ignore_cursor_events(*current);
-    // Visual hint: when click-through is on, lower opacity so user knows
-    // (we can't read the current state via Tauri reliably across platforms).
-}
-
 struct ClickThroughState(std::sync::Mutex<bool>);
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -36,28 +28,27 @@ pub fn run() {
                         return;
                     };
 
-                    // F8: toggle visibility
                     let f8 = Shortcut::new(None, Code::F8);
+                    let ctrl_f8 = Shortcut::new(Some(Modifiers::CONTROL), Code::F8);
+
                     if shortcut == &f8 {
                         toggle_visibility(&window);
-                        return;
-                    }
-
-                    // Ctrl+F8: toggle click-through
-                    let ctrl_f8 = Shortcut::new(Some(Modifiers::CONTROL), Code::F8);
-                    if shortcut == &ctrl_f8 {
+                    } else if shortcut == &ctrl_f8 {
                         let state: tauri::State<ClickThroughState> = app.state();
-                        toggle_click_through(&window, &state);
-                        return;
+                        let mut current = state.0.lock().unwrap();
+                        *current = !*current;
+                        let _ = window.set_ignore_cursor_events(*current);
                     }
                 })
                 .build(),
         )
         .setup(|app| {
+            // Best-effort hotkey registration; ignore errors so the app still
+            // launches if F8 is already taken by another process.
             let f8 = Shortcut::new(None, Code::F8);
             let ctrl_f8 = Shortcut::new(Some(Modifiers::CONTROL), Code::F8);
-            app.global_shortcut().register(f8)?;
-            app.global_shortcut().register(ctrl_f8)?;
+            let _ = app.global_shortcut().register(f8);
+            let _ = app.global_shortcut().register(ctrl_f8);
             Ok(())
         })
         .run(tauri::generate_context!())
