@@ -2,7 +2,7 @@
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
   "description": "Default permissions for the overlay window",
-  "windows": ["main"],
+  "windows": ["cycles", "missions", "notes"],
   "permissions": [
     "core:default",
     "global-shortcut:default",

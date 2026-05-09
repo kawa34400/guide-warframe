@@ -1,5 +1,7 @@
-use tauri::{Manager, PhysicalPosition, PhysicalSize, WebviewWindow};
+use tauri::{Manager, WebviewWindow};
 use tauri_plugin_global_shortcut::{Code, GlobalShortcutExt, Modifiers, Shortcut, ShortcutState};
+
+const WINDOW_LABELS: [&str; 3] = ["cycles", "missions", "notes"];
 
 fn log(msg: &str) {
     use std::io::Write;
@@ -16,57 +18,45 @@ fn log(msg: &str) {
     }
 }
 
-fn toggle_visibility(window: &WebviewWindow) {
-    let visible = window.is_visible().unwrap_or(false);
-    if visible {
-        let _ = window.hide();
-    } else {
-        let _ = window.show();
+fn each_window<F: Fn(&WebviewWindow)>(app: &tauri::AppHandle, f: F) {
+    for label in WINDOW_LABELS {
+        if let Some(w) = app.get_webview_window(label) {
+            f(&w);
+        }
     }
 }
 
-fn cycle_corner(window: &WebviewWindow, state: &CornerState) {
+fn toggle_visibility_all(app: &tauri::AppHandle, state: &VisibilityState) {
     let mut current = state.0.lock().unwrap();
-    *current = (*current + 1) % 4;
-    let corner = *current;
-    let monitor = match window.current_monitor() {
-        Ok(Some(m)) => m,
-        _ => return,
-    };
-    let scale = monitor.scale_factor();
-    let mon_size = monitor.size();
-    let mon_pos = monitor.position();
+    *current = !*current;
+    let want_visible = *current;
+    each_window(app, |w| {
+        if want_visible {
+            let _ = w.show();
+        } else {
+            let _ = w.hide();
+        }
+    });
+}
 
-    let win_size = window.outer_size().unwrap_or(PhysicalSize::new(280, 60));
-    let margin: u32 = (20.0 * scale) as u32;
-
-    let (x, y) = match corner {
-        0 => (mon_pos.x + margin as i32, mon_pos.y + margin as i32),
-        1 => (
-            mon_pos.x + mon_size.width as i32 - win_size.width as i32 - margin as i32,
-            mon_pos.y + margin as i32,
-        ),
-        2 => (
-            mon_pos.x + mon_size.width as i32 - win_size.width as i32 - margin as i32,
-            mon_pos.y + mon_size.height as i32 - win_size.height as i32 - margin as i32,
-        ),
-        _ => (
-            mon_pos.x + margin as i32,
-            mon_pos.y + mon_size.height as i32 - win_size.height as i32 - margin as i32,
-        ),
-    };
-    let _ = window.set_position(PhysicalPosition::new(x, y));
+fn toggle_click_through_all(app: &tauri::AppHandle, state: &ClickThroughState) {
+    let mut current = state.0.lock().unwrap();
+    *current = !*current;
+    let val = *current;
+    each_window(app, |w| {
+        let _ = w.set_ignore_cursor_events(val);
+    });
 }
 
 struct ClickThroughState(std::sync::Mutex<bool>);
-struct CornerState(std::sync::Mutex<u32>);
+struct VisibilityState(std::sync::Mutex<bool>);
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     log("run() entered");
     tauri::Builder::default()
         .manage(ClickThroughState(std::sync::Mutex::new(false)))
-        .manage(CornerState(std::sync::Mutex::new(1))) // start top-right
+        .manage(VisibilityState(std::sync::Mutex::new(true)))
         .plugin(tauri_plugin_window_state::Builder::default().build())
         .plugin(
             tauri_plugin_global_shortcut::Builder::new()
@@ -74,24 +64,15 @@ pub fn run() {
                     if event.state() != ShortcutState::Pressed {
                         return;
                     }
-                    let Some(window) = app.get_webview_window("main") else {
-                        return;
-                    };
-
                     let f8 = Shortcut::new(None, Code::F8);
                     let ctrl_f8 = Shortcut::new(Some(Modifiers::CONTROL), Code::F8);
-                    let shift_f8 = Shortcut::new(Some(Modifiers::SHIFT), Code::F8);
 
                     if shortcut == &f8 {
-                        toggle_visibility(&window);
+                        let state: tauri::State<VisibilityState> = app.state();
+                        toggle_visibility_all(app, &state);
                     } else if shortcut == &ctrl_f8 {
                         let state: tauri::State<ClickThroughState> = app.state();
-                        let mut current = state.0.lock().unwrap();
-                        *current = !*current;
-                        let _ = window.set_ignore_cursor_events(*current);
-                    } else if shortcut == &shift_f8 {
-                        let state: tauri::State<CornerState> = app.state();
-                        cycle_corner(&window, &state);
+                        toggle_click_through_all(app, &state);
                     }
                 })
                 .build(),
@@ -100,10 +81,8 @@ pub fn run() {
             log("setup() entered");
             let f8 = Shortcut::new(None, Code::F8);
             let ctrl_f8 = Shortcut::new(Some(Modifiers::CONTROL), Code::F8);
-            let shift_f8 = Shortcut::new(Some(Modifiers::SHIFT), Code::F8);
             let _ = app.global_shortcut().register(f8);
             let _ = app.global_shortcut().register(ctrl_f8);
-            let _ = app.global_shortcut().register(shift_f8);
             log("setup() done");
             Ok(())
         })
