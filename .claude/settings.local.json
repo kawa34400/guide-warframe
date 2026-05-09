@@ -101,7 +101,10 @@
       "Bash(curl -s \"https://guide-warframe.vercel.app/api/wf?p=pc/sortie&language=fr\")",
       "Bash(curl -sL \"https://api.warframestat.us/warframes/?language=fr\")",
       "Bash(curl -s \"https://guide-warframe.vercel.app/helminth\")",
-      "Bash(curl -s \"https://guide-warframe.vercel.app/settings\")"
+      "Bash(curl -s \"https://guide-warframe.vercel.app/settings\")",
+      "Bash(curl -s -o /dev/null -w \"/lich = %{http_code}\\\\n\" \"https://guide-warframe.vercel.app/lich\")",
+      "Bash(curl -s -o /dev/null -w \"/api/lich-weapons = %{http_code}\\\\n\" \"https://guide-warframe.vercel.app/api/lich-weapons\")",
+      "Bash(npx next *)"
     ]
   }
 }

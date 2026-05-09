@@ -51,23 +51,17 @@ export default function NotificationsManager() {
       lastTick.current = Date.now();
       const state = loadState();
 
-      // Fetch in parallel only what's needed
-      const tasks: Promise<unknown>[] = [];
-      let baro: { active?: boolean; location?: string } | null = null;
-      let sortie: { id?: string; boss?: string } | null = null;
-      let archon: { id?: string; boss?: string } | null = null;
-      let cetus: { state?: string } | null = null;
+      type Baro = { active?: boolean; location?: string };
+      type Sortie = { id?: string; boss?: string };
+      type Archon = { id?: string; boss?: string };
+      type Cetus = { state?: string };
 
-      if (prefs.baro) tasks.push(get<typeof baro>("voidTrader").then((d) => (baro = d)));
-      if (prefs.sortie)
-        tasks.push(get<typeof sortie>("sortie").then((d) => (sortie = d)));
-      if (prefs.archon)
-        tasks.push(
-          get<typeof archon>("archonHunt").then((d) => (archon = d)),
-        );
-      if (prefs.eidolon)
-        tasks.push(get<typeof cetus>("cetusCycle").then((d) => (cetus = d)));
-      await Promise.all(tasks);
+      const [baro, sortie, archon, cetus] = await Promise.all([
+        prefs.baro ? get<Baro>("voidTrader") : Promise.resolve(null),
+        prefs.sortie ? get<Sortie>("sortie") : Promise.resolve(null),
+        prefs.archon ? get<Archon>("archonHunt") : Promise.resolve(null),
+        prefs.eidolon ? get<Cetus>("cetusCycle") : Promise.resolve(null),
+      ]);
       if (cancelled) return;
 
       const newState = { ...state };
