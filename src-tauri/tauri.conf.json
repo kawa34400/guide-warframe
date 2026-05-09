@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Guide Warframe Overlay",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "identifier": "com.kawa34400.guide-warframe-overlay",
   "build": {
     "beforeDevCommand": "",
@@ -14,18 +14,20 @@
         "label": "main",
         "title": "Guide Warframe Overlay",
         "url": "https://guide-warframe.vercel.app/overlay",
-        "width": 320,
-        "height": 480,
-        "minWidth": 280,
-        "minHeight": 240,
+        "width": 280,
+        "height": 60,
+        "minWidth": 200,
+        "minHeight": 40,
         "resizable": true,
         "decorations": false,
         "alwaysOnTop": true,
-        "skipTaskbar": false,
+        "skipTaskbar": true,
         "focus": false,
         "transparent": true,
         "visible": true,
-        "center": false
+        "center": false,
+        "x": 20,
+        "y": 20
       }
     ],
     "security": {
