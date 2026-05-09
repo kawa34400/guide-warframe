@@ -28,11 +28,16 @@ export async function GET(req: NextRequest) {
       cache: "no-store",
     });
     const body = await res.text();
+    // Only cache successful responses; let Vercel re-hit upstream on errors so a
+    // transient 404 from warframestat doesn't get pinned at the edge for 60s.
+    const cacheControl = res.ok
+      ? "public, s-maxage=60, stale-while-revalidate=300"
+      : "no-store";
     return new Response(body, {
       status: res.status,
       headers: {
         "content-type": res.headers.get("content-type") ?? "application/json",
-        "cache-control": "public, s-maxage=60, stale-while-revalidate=300",
+        "cache-control": cacheControl,
       },
     });
   } catch (e) {
