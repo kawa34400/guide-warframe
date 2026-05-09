@@ -495,6 +495,24 @@ function ArbitrationCard() {
   const now = useNow();
   if (loading) return <Card title="Arbitration">…</Card>;
   if (error || !data) return <Card title="Arbitration">indisponible</Card>;
+  const isPlaceholder =
+    !data.type ||
+    data.type === "Unknown" ||
+    data.node?.startsWith("SolNode000") ||
+    new Date(data.expiry).getTime() <= now;
+  if (isPlaceholder) {
+    return (
+      <Card title="Arbitration">
+        <div className="text-sm text-muted">
+          Pas d&apos;arbitration en cours.
+          <br />
+          <span className="text-xs">
+            Une nouvelle arbitration apparaît toutes les heures.
+          </span>
+        </div>
+      </Card>
+    );
+  }
   const factionCls = FACTION_COLORS[data.enemy] ?? "text-muted";
   return (
     <Card title="Arbitration" expires={timeLeft(data.expiry, now)}>
