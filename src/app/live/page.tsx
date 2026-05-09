@@ -124,21 +124,58 @@ function Card({
   title,
   expires,
   children,
+  accent,
 }: {
-  title: string;
+  title: React.ReactNode;
   expires?: string;
   children: React.ReactNode;
+  accent?: string;
 }) {
   return (
-    <section className="bg-panel border border-border rounded-lg p-4">
-      <header className="flex items-center justify-between mb-3">
-        <h2 className="font-semibold">{title}</h2>
+    <section className="panel notch p-4 holo-border">
+      <header className="flex items-center justify-between mb-3 pb-2 border-b border-border/50">
+        <h2
+          className={`text-sm tracking-wider uppercase ${accent ?? "text-accent"}`}
+        >
+          {title}
+        </h2>
         {expires && (
-          <span className="text-xs text-muted tabular-nums">{expires}</span>
+          <span className="text-xs text-muted tabular-nums font-mono">
+            {expires}
+          </span>
         )}
       </header>
       {children}
     </section>
+  );
+}
+
+const FACTION_COLORS: Record<string, string> = {
+  Grineer: "text-faction-grineer",
+  Corpus: "text-faction-corpus",
+  Infested: "text-faction-infested",
+  Sentient: "text-faction-sentient",
+  Corrupted: "text-faction-corrupted",
+  Orokin: "text-faction-corrupted",
+};
+
+const TIER_COLORS: Record<string, string> = {
+  Lith: "text-tier-lith border-tier-lith/40 bg-tier-lith/10",
+  Meso: "text-tier-meso border-tier-meso/40 bg-tier-meso/10",
+  Neo: "text-tier-neo border-tier-neo/40 bg-tier-neo/10",
+  Axi: "text-tier-axi border-tier-axi/40 bg-tier-axi/10",
+  Requiem: "text-tier-requiem border-tier-requiem/40 bg-tier-requiem/10",
+  Omnia: "text-tier-omnia border-tier-omnia/40 bg-tier-omnia/10",
+};
+
+function TierBadge({ tier }: { tier: string }) {
+  const cls = TIER_COLORS[tier] ?? "text-muted border-border bg-panel-2";
+  return (
+    <span
+      className={`inline-block text-[10px] px-1.5 py-0.5 rounded border tracking-wider font-display uppercase ${cls}`}
+    >
+      {tier}
+    </span>
   );
 }
 
@@ -171,13 +208,27 @@ function SortieCard() {
   const now = useNow();
   if (loading) return <Card title="Sortie">…</Card>;
   if (error || !data) return <Card title="Sortie">indisponible</Card>;
+  const factionCls = FACTION_COLORS[data.faction] ?? "text-muted";
   return (
-    <Card title={`Sortie — ${data.boss}`} expires={timeLeft(data.expiry, now)}>
-      <ul className="space-y-1 text-sm">
+    <Card
+      title={
+        <span>
+          Sortie — <span className={factionCls}>{data.boss}</span>
+        </span>
+      }
+      expires={timeLeft(data.expiry, now)}
+    >
+      <ul className="space-y-2 text-sm">
         {data.variants.map((v, i) => (
-          <li key={i}>
-            <span className="text-accent">{v.missionType}</span> — {v.node}
-            <div className="text-xs text-muted">{v.modifier}</div>
+          <li
+            key={i}
+            className="bg-panel-2/50 rounded px-2 py-1.5 border-l-2 border-accent/40"
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-accent font-medium">{v.missionType}</span>
+              <span className="text-muted text-xs">{v.node}</span>
+            </div>
+            <div className="text-xs text-muted/80 mt-0.5">{v.modifier}</div>
           </li>
         ))}
       </ul>
@@ -190,15 +241,31 @@ function ArchonCard() {
   const now = useNow();
   if (loading) return <Card title="Archon Hunt">…</Card>;
   if (error || !data) return <Card title="Archon Hunt">indisponible</Card>;
+  const factionCls = FACTION_COLORS[data.faction] ?? "text-muted";
   return (
     <Card
-      title={`Archon — ${data.boss}`}
+      title={
+        <span>
+          Archon — <span className={factionCls}>{data.boss}</span>
+        </span>
+      }
       expires={timeLeft(data.expiry, now)}
     >
-      <ul className="space-y-1 text-sm">
+      <ul className="space-y-2 text-sm">
         {data.missions.map((m, i) => (
-          <li key={i}>
-            <span className="text-accent">{m.type}</span> — {m.node}
+          <li
+            key={i}
+            className="bg-panel-2/50 rounded px-2 py-1.5 border-l-2 border-accent-3/40"
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-accent-3 font-medium">{m.type}</span>
+              <span className="text-muted text-xs">{m.node}</span>
+            </div>
+            {m.nightmare && (
+              <span className="text-[10px] text-warning tracking-wider uppercase">
+                ★ Nightmare
+              </span>
+            )}
           </li>
         ))}
       </ul>
@@ -231,14 +298,16 @@ function FissuresCard() {
                 {list.map((f) => (
                   <li
                     key={f.id}
-                    className="flex justify-between gap-2 bg-panel-2 rounded px-2 py-1"
+                    className="flex items-center gap-2 bg-panel-2/50 rounded px-2 py-1"
                   >
-                    <span>
-                      <span className="text-accent">{f.tier}</span>{" "}
+                    <TierBadge tier={f.tier} />
+                    <span className="flex-1">
                       {f.missionType}
-                      <span className="text-muted"> · {f.node}</span>
+                      <span className="text-muted text-xs ml-1.5">
+                        {f.node}
+                      </span>
                     </span>
-                    <span className="text-xs text-muted tabular-nums">
+                    <span className="text-xs text-muted tabular-nums font-mono">
                       {timeLeft(f.expiry, now)}
                     </span>
                   </li>

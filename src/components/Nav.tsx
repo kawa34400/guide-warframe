@@ -15,23 +15,31 @@ const links = [
 export default function Nav() {
   const path = usePathname();
   return (
-    <header className="border-b border-border bg-panel/80 backdrop-blur sticky top-0 z-10">
-      <div className="max-w-6xl mx-auto px-4 h-14 flex items-center gap-2">
-        <span className="font-semibold text-accent shrink-0">⟁ Warframe</span>
-        <nav className="flex-1 flex items-center gap-1 overflow-x-auto">
+    <header className="border-b border-border bg-bg-2/85 backdrop-blur-md sticky top-0 z-30 scanlines">
+      <div className="max-w-6xl mx-auto px-4 h-14 flex items-center gap-3">
+        <Link
+          href="/"
+          className="font-display text-accent text-glow tracking-[0.15em] text-sm shrink-0 hover:opacity-80 transition"
+        >
+          ⟁ WARFRAME
+        </Link>
+        <nav className="flex-1 flex items-center gap-1 overflow-x-auto scrollbar-thin">
           {links.map((l) => {
             const active = path === l.href;
             return (
               <Link
                 key={l.href}
                 href={l.href}
-                className={`px-3 py-1.5 rounded-md text-sm whitespace-nowrap transition ${
+                className={`relative px-3 py-1.5 rounded-md text-sm whitespace-nowrap font-display tracking-wider uppercase transition ${
                   active
-                    ? "bg-panel-2 text-accent"
-                    : "text-muted hover:text-text hover:bg-panel-2"
+                    ? "text-accent text-glow bg-accent/5"
+                    : "text-muted hover:text-text"
                 }`}
               >
                 {l.label}
+                {active && (
+                  <span className="absolute left-2 right-2 -bottom-px h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
+                )}
               </Link>
             );
           })}

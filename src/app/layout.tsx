@@ -1,8 +1,23 @@
 import type { Metadata, Viewport } from "next";
+import { Rajdhani, Orbitron } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Providers from "./providers";
 import SwRegister from "@/components/SwRegister";
+
+const rajdhani = Rajdhani({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-rajdhani",
+  display: "swap",
+});
+
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-orbitron",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Guide Warframe",
@@ -33,7 +48,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr">
+    <html
+      lang="fr"
+      className={`${rajdhani.variable} ${orbitron.variable}`}
+    >
       <body className="min-h-screen bg-bg text-text">
         <Providers>
           <Nav />

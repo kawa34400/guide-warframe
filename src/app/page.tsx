@@ -31,80 +31,163 @@ export default function Home() {
     (incarnon.warframeRotation as Record<string, string[]>)[String(wWarframe)] ?? [];
 
   return (
-    <div className="space-y-6">
-      <header>
-        <h1 className="text-2xl font-bold">Guide Warframe</h1>
-        <p className="text-muted text-sm">
-          Reset hebdo dans ~{hoursUntilReset}h ({reset.toLocaleString("fr-FR")})
-        </p>
+    <div className="space-y-8">
+      {/* Hero */}
+      <header className="relative overflow-hidden rounded-lg holo-border p-6">
+        <div className="relative z-10">
+          <div className="text-xs text-muted tracking-[0.3em] uppercase mb-2">
+            Tenno Console
+          </div>
+          <h1 className="font-display text-3xl md:text-4xl text-glow text-accent">
+            Guide Warframe
+          </h1>
+          <div className="mt-3 flex items-center gap-2 text-sm text-muted">
+            <span className="dot text-accent-2" />
+            Reset hebdo dans {hoursUntilReset}h ·{" "}
+            <span className="text-text/80">
+              {reset.toLocaleString("fr-FR", {
+                weekday: "short",
+                day: "2-digit",
+                month: "short",
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </span>
+          </div>
+        </div>
+        {/* Decorative ring */}
+        <div
+          aria-hidden
+          className="absolute -right-32 -top-32 w-96 h-96 rounded-full border border-accent/10 pointer-events-none"
+        />
+        <div
+          aria-hidden
+          className="absolute -right-20 -top-20 w-72 h-72 rounded-full border border-accent/5 pointer-events-none"
+        />
       </header>
 
       <section className="grid md:grid-cols-2 gap-4">
-        <div className="bg-panel border border-border rounded-lg p-4">
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="font-semibold">
-              Incarnon — Semaine {wIncarnon}/{8}
-            </h2>
-            <Link href="/incarnon" className="text-accent text-sm">
-              Tout voir →
-            </Link>
-          </div>
-          <ul className="space-y-1">
-            {incarnonThisWeek.map((w) => (
-              <li key={w} className="text-sm">
-                • {w}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="bg-panel border border-border rounded-lg p-4">
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="font-semibold">
-              Warframes — Semaine {wWarframe}/11
-            </h2>
-            <Link href="/warframes" className="text-accent text-sm">
-              Tout voir →
-            </Link>
-          </div>
-          <ul className="space-y-1">
-            {warframeThisWeek.map((w) => (
-              <li key={w} className="text-sm">
-                • {w}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <RotationCard
+          href="/incarnon"
+          title="Incarnon"
+          subtitle={`Semaine ${wIncarnon} / 8`}
+          items={incarnonThisWeek}
+        />
+        <RotationCard
+          href="/warframes"
+          title="Warframes"
+          subtitle={`Semaine ${wWarframe} / 11`}
+          items={warframeThisWeek}
+        />
       </section>
 
-      <section className="bg-panel border border-border rounded-lg p-4">
-        <h2 className="font-semibold mb-2">Sections</h2>
-        <div className="grid sm:grid-cols-3 gap-3">
-          <Link
+      <section>
+        <h2 className="text-sm tracking-[0.25em] text-muted mb-3">Sections</h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <SectionTile
             href="/construction"
-            className="block p-3 bg-panel-2 border border-border rounded hover:border-accent transition"
-          >
-            <div className="font-medium">Construction</div>
-            <div className="text-muted text-xs">
-              Armes ressources & craftées
-            </div>
-          </Link>
-          <Link
-            href="/incarnon"
-            className="block p-3 bg-panel-2 border border-border rounded hover:border-accent transition"
-          >
-            <div className="font-medium">Incarnon</div>
-            <div className="text-muted text-xs">Évolutions + rotation 8 semaines</div>
-          </Link>
-          <Link
-            href="/warframes"
-            className="block p-3 bg-panel-2 border border-border rounded hover:border-accent transition"
-          >
-            <div className="font-medium">Warframes</div>
-            <div className="text-muted text-xs">Rotation 11 semaines</div>
-          </Link>
+            title="Construction"
+            desc="Armes ressources & craftées"
+            badge="22 / 33 / 19"
+          />
+          <SectionTile
+            href="/live"
+            title="Live"
+            desc="Sortie · Archon · Fissures · Baro"
+            badge="API"
+            accent
+          />
+          <SectionTile
+            href="/team"
+            title="Équipe"
+            desc="Progression partagée du squad"
+            badge="Sync"
+          />
         </div>
       </section>
     </div>
+  );
+}
+
+function RotationCard({
+  href,
+  title,
+  subtitle,
+  items,
+}: {
+  href: string;
+  title: string;
+  subtitle: string;
+  items: string[];
+}) {
+  return (
+    <Link
+      href={href}
+      className="block panel notch p-5 holo-border hover:border-accent/50 transition group"
+    >
+      <div className="flex items-center justify-between mb-3">
+        <div>
+          <h2 className="text-lg text-accent text-glow">{title}</h2>
+          <div className="text-xs text-muted tracking-wider uppercase">
+            {subtitle}
+          </div>
+        </div>
+        <span className="text-accent text-xs opacity-0 group-hover:opacity-100 transition">
+          →
+        </span>
+      </div>
+      <ul className="space-y-1">
+        {items.map((w) => (
+          <li
+            key={w}
+            className="text-sm flex items-center gap-2 py-0.5"
+          >
+            <span className="text-accent-2/60 text-xs">▸</span>
+            {w}
+          </li>
+        ))}
+      </ul>
+    </Link>
+  );
+}
+
+function SectionTile({
+  href,
+  title,
+  desc,
+  badge,
+  accent,
+}: {
+  href: string;
+  title: string;
+  desc: string;
+  badge?: string;
+  accent?: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className="block panel notch p-4 hover:border-accent/50 transition group relative"
+    >
+      <div className="flex items-start justify-between">
+        <div>
+          <div className="font-display text-base tracking-wider uppercase group-hover:text-accent transition">
+            {title}
+          </div>
+          <div className="text-muted text-xs mt-1">{desc}</div>
+        </div>
+        {badge && (
+          <span
+            className={`text-[10px] px-1.5 py-0.5 rounded border tracking-wider uppercase ${
+              accent
+                ? "border-accent-2/40 text-accent-2 bg-accent-2/10"
+                : "border-border text-muted bg-panel-2"
+            }`}
+          >
+            {badge}
+          </span>
+        )}
+      </div>
+    </Link>
   );
 }

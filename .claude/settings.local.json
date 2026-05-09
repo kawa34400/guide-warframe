@@ -28,7 +28,18 @@
       "Bash(cargo --version)",
       "Bash(rustup --version)",
       "Bash(node scripts/gen-icons.mjs)",
-      "Bash(git -c user.email=alexa@local -c user.name=alexa commit -m 'Add PWA: manifest, icons, service worker *)"
+      "Bash(git -c user.email=alexa@local -c user.name=alexa commit -m 'Add PWA: manifest, icons, service worker *)",
+      "Bash(curl -sf -o /dev/null https://guide-warframe.vercel.app/manifest.webmanifest)",
+      "Bash(curl -s https://guide-warframe.vercel.app/manifest.webmanifest)",
+      "Bash(curl -s -o /dev/null -w \"icon-192=%{http_code} sw=%{http_code}\" https://guide-warframe.vercel.app/icon-192.png)",
+      "Bash(git rm *)",
+      "Bash(curl -s -o /dev/null -w \"manifest=%{http_code}\\\\nicon-192=%{http_code}\\\\nsw=%{http_code}\\\\n\" -w \"manifest=%{http_code}\\\\n\" https://guide-warframe.vercel.app/manifest.webmanifest)",
+      "Bash(curl -s -o /dev/null -w \"icon=%{http_code}\\\\n\" https://guide-warframe.vercel.app/icon-192.png)",
+      "Bash(curl -s -o /dev/null -w \"sw=%{http_code}\\\\n\" https://guide-warframe.vercel.app/sw.js)",
+      "Bash(git config *)",
+      "Bash(git rebase *)",
+      "Bash(git stash *)",
+      "Bash(git commit -m 'feat\\(ui\\): Warframe sci-fi visual redesign *)"
     ]
   }
 }

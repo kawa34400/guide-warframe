@@ -57,16 +57,20 @@ export default function IncarnonPage() {
             return (
               <div
                 key={w}
-                className={`p-3 rounded border ${
+                className={`p-3 rounded-lg border transition ${
                   isCurrent
-                    ? "bg-accent/10 border-accent"
-                    : "bg-panel-2 border-border"
+                    ? "bg-accent/10 border-accent/60 pulse-glow"
+                    : "bg-panel-2/50 border-border"
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-semibold">Semaine {w}</span>
+                  <span className={`font-display tracking-wider uppercase text-sm ${isCurrent ? "text-accent text-glow" : ""}`}>
+                    Semaine {w}
+                  </span>
                   {isCurrent && (
-                    <span className="text-xs text-accent">EN COURS</span>
+                    <span className="text-[10px] text-accent tracking-[0.2em] flex items-center gap-1">
+                      <span className="dot text-accent" /> ACTIVE
+                    </span>
                   )}
                 </div>
                 <div className="space-y-1">
