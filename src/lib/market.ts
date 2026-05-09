@@ -132,21 +132,40 @@ export function useMarketPrice(name: string, eager = false) {
   const [tried, setTried] = useState(false);
   const cancelledRef = useRef(false);
 
+  const [error, setError] = useState<string | null>(null);
+
   const load = useCallback(async () => {
     if (loading || tried) return;
     setLoading(true);
+    setError(null);
     cancelledRef.current = false;
     try {
       const slugs = await loadSlugSet();
-      const candidates = candidateSlugs(name).filter((s) => slugs.has(s));
+      if (slugs.size === 0) {
+        setError("catalogue vide");
+        return;
+      }
+      const allCandidates = candidateSlugs(name);
+      const candidates = allCandidates.filter((s) => slugs.has(s));
+      if (process.env.NODE_ENV !== "production") {
+        // eslint-disable-next-line no-console
+        console.log("[market]", name, "tried:", allCandidates, "matched:", candidates);
+      }
+      if (candidates.length === 0) {
+        setError("pas sur le market");
+        return;
+      }
       for (const slug of candidates) {
         const s = await fetchStats(slug);
         if (cancelledRef.current) return;
         if (s) {
           setData({ slug, stats: s });
-          break;
+          return;
         }
       }
+      setError("pas de trades récents");
+    } catch (e) {
+      setError(String(e));
     } finally {
       if (!cancelledRef.current) {
         setLoading(false);
@@ -162,5 +181,5 @@ export function useMarketPrice(name: string, eager = false) {
     };
   }, [eager, load]);
 
-  return { data, loading, tried, load };
+  return { data, loading, tried, error, load };
 }

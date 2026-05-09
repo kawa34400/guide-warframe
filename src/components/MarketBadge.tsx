@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function MarketBadge({ name, eager = false, className }: Props) {
-  const { data, loading, tried, load } = useMarketPrice(name, eager);
+  const { data, loading, tried, error, load } = useMarketPrice(name, eager);
 
   if (data) {
     const isPrime = data.slug.endsWith("_prime_set");
@@ -35,8 +35,14 @@ export default function MarketBadge({ name, eager = false, className }: Props) {
   }
 
   if (tried) {
-    // Failed lookup → don't render anything (keeps UI clean)
-    return null;
+    return (
+      <span
+        title={error ?? "pas de match warframe.market"}
+        className={`text-[10px] text-muted/40 px-1 ${className ?? ""}`}
+      >
+        —
+      </span>
+    );
   }
 
   if (eager) return null;

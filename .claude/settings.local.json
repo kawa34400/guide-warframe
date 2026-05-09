@@ -65,7 +65,11 @@
       "Bash(curl -s \"https://api.warframe.market/v2/items\")",
       "Bash(curl -s \"https://api.warframe.market/v2/items/braton_prime_set/statistics\")",
       "Bash(curl -sI \"https://api.warframe.market/v2/items/braton_prime_set/statistics\")",
-      "Bash(curl -s \"https://api.warframe.market/v1/items/braton_prime_set/statistics\")"
+      "Bash(curl -s \"https://api.warframe.market/v1/items/braton_prime_set/statistics\")",
+      "Bash(curl -s \"https://guide-warframe.vercel.app/api/market?p=v2/items\")",
+      "Bash(python3 -c \"import sys, json; d=json.load\\(sys.stdin\\); slugs=[i['slug'] for i in d.get\\('data', []\\)]; print\\('total:', len\\(slugs\\)\\); print\\('braton variants:', [s for s in slugs if 'braton' in s][:10]\\); print\\('boltor variants:', [s for s in slugs if 'boltor' in s][:10]\\)\")",
+      "Bash(curl -s \"https://guide-warframe.vercel.app/api/market?p=v1/items/braton_prime_set/statistics\")",
+      "Bash(python3 -c \"import sys, json; d=json.load\\(sys.stdin\\); s=d.get\\('payload',{}\\).get\\('statistics_closed',{}\\); print\\('48h:', len\\(s.get\\('48hours',[]\\)\\)\\); print\\('90d:', len\\(s.get\\('90days',[]\\)\\)\\); print\\('latest 48h:', s.get\\('48hours',[]\\)[-1] if s.get\\('48hours'\\) else 'EMPTY'\\)\")"
     ]
   }
 }
