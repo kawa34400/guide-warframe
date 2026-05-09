@@ -15,6 +15,7 @@ import {
   type Arbitration,
   type Calendar,
 } from "@/lib/wfapi";
+import { nightwaveFr } from "@/lib/nightwave-fr";
 
 const CYCLE_DEFS: {
   endpoint: string;
@@ -424,7 +425,7 @@ function NightwaveCard() {
                         {c.isElite && (
                           <span className="text-warning mr-1">★</span>
                         )}
-                        {c.title}
+                        {nightwaveFr(c.title)}
                       </span>
                       <span className="text-muted text-xs tabular-nums">
                         {c.reputation}

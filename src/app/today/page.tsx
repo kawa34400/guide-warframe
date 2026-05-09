@@ -11,6 +11,21 @@ import {
   type Arbitration,
 } from "@/lib/wfapi";
 import { nextResetDate } from "@/lib/rotation";
+import { nightwaveFr } from "@/lib/nightwave-fr";
+
+function isPlaceholderArbi(
+  data: { type?: string; node?: string; expiry?: string } | null,
+  now: number,
+): boolean {
+  if (!data) return true;
+  return (
+    !data.type ||
+    data.type === "Unknown" ||
+    !!data.node?.startsWith("SolNode000") ||
+    new Date(data.expiry ?? 0).getTime() <= now ||
+    new Date(data.expiry ?? 0).getTime() - now > 365 * 24 * 60 * 60 * 1000
+  );
+}
 
 function useNow(intervalMs = 30_000) {
   const [now, setNow] = useState(Date.now());
@@ -142,7 +157,7 @@ export default function TodayPage() {
                 .filter((c) => c.isDaily)
                 .map((c) => (
                   <li key={c.id} className="flex justify-between gap-2">
-                    <span className="truncate">{c.title}</span>
+                    <span className="truncate">{nightwaveFr(c.title)}</span>
                     <span className="text-xs text-muted tabular-nums">
                       {c.reputation}
                     </span>
@@ -180,17 +195,26 @@ export default function TodayPage() {
 
         <Block
           title="Arbitration"
-          countdown={arbi.data ? timeLeft(arbi.data.expiry, now) : ""}
+          countdown={
+            arbi.data &&
+            !isPlaceholderArbi(arbi.data, now)
+              ? timeLeft(arbi.data.expiry, now)
+              : ""
+          }
           href="/live"
         >
           {arbi.data ? (
-            <div className="text-sm">
-              <span className="text-accent">{arbi.data.type}</span>
-              <span className="text-muted text-xs ml-2">{arbi.data.node}</span>
-              <div className="text-xs text-muted mt-1">
-                {arbi.data.enemy}
+            isPlaceholderArbi(arbi.data, now) ? (
+              <div className="text-sm text-muted">
+                Pas d&apos;arbitration en cours.
               </div>
-            </div>
+            ) : (
+              <div className="text-sm">
+                <span className="text-accent">{arbi.data.type}</span>
+                <span className="text-muted text-xs ml-2">{arbi.data.node}</span>
+                <div className="text-xs text-muted mt-1">{arbi.data.enemy}</div>
+              </div>
+            )
           ) : (
             <div className="text-sm text-muted">…</div>
           )}
