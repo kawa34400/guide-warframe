@@ -75,6 +75,13 @@ html, body {
   color: var(--text);
 }
 
+html.chromeless,
+html.chromeless body.chromeless-body {
+  background: transparent !important;
+  background-image: none !important;
+  min-height: 0 !important;
+}
+
 body {
   font-family: var(--font-sans);
   font-feature-settings: "ss01", "cv11";
