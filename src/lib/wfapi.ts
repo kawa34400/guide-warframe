@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const PLATFORM = "pc"; // pc | ps4 | xb1 | swi
 const LANG = "fr";
 
 export type Sortie = {
@@ -118,8 +117,8 @@ export type Nightwave = {
 };
 
 async function fetchJson<T>(path: string): Promise<T> {
-  const fullPath = `${PLATFORM}/${path}`;
-  const r = await fetch(`/api/wf?p=${encodeURIComponent(fullPath)}&language=${LANG}`);
+  // warframestat.us removed the /pc/ platform prefix — endpoints are now flat.
+  const r = await fetch(`/api/wf?p=${encodeURIComponent(path)}&language=${LANG}`);
   if (!r.ok) throw new Error(`wfapi ${path}: ${r.status}`);
   return r.json();
 }

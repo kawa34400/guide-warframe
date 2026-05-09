@@ -81,7 +81,17 @@
       "Bash(curl -sL --compressed \"https://api.warframestat.us/items/\" -w \"%{size_download} bytes downloaded, %{speed_download} B/s\\\\n\" -o /dev/null)",
       "Bash(curl -sL --compressed -o /tmp/items.json \"https://api.warframestat.us/items/?language=fr\")",
       "Read(//tmp/**)",
-      "Bash(curl -sL \"https://guide-warframe.vercel.app/api/wf?p=items\" -w \"\\\\n[size %{size_download} status %{http_code}]\\\\n\" -o /tmp/items.json)"
+      "Bash(curl -sL \"https://guide-warframe.vercel.app/api/wf?p=items\" -w \"\\\\n[size %{size_download} status %{http_code}]\\\\n\" -o /tmp/items.json)",
+      "Bash(curl -s \"https://guide-warframe.vercel.app/api/mastery-items\")",
+      "Bash(python3 -c ' *)",
+      "Bash(curl -s -o /dev/null -w \"wf root no-p: %{http_code}\\\\n\" \"https://guide-warframe.vercel.app/api/wf\")",
+      "Bash(curl -s \"https://guide-warframe.vercel.app/api/wf\")",
+      "Bash(curl -s \"https://guide-warframe.vercel.app/api/wf?p=pc/sortie&language=fr\" -w \"\\\\n[status %{http_code}]\\\\n\")",
+      "Bash(curl -sL \"https://api.warframestat.us/pc/sortie?language=fr\")",
+      "Bash(curl -sL \"https://api.warframestat.us/sortie?language=fr\")",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' 'https://api.warframestat.us/__TRACKED_VAR__?language=fr')",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' 'https://api.warframestat.us/pc/__TRACKED_VAR__?language=fr')",
+      "Bash(curl -sI \"https://api.warframestat.us/sortie?language=fr\")"
     ]
   }
 }
