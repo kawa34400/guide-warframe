@@ -1,0 +1,174 @@
+{
+  "evolutions": [
+    "Ack & Brunt",
+    "Dual Toxocyst",
+    "Okina",
+    "Angstrum",
+    "Felarx",
+    "Onos",
+    "Anku",
+    "Furax",
+    "Paris",
+    "Atomos",
+    "Furis",
+    "Phenmor",
+    "Bo",
+    "Gammacor",
+    "Praedos",
+    "Boar",
+    "Gorgon",
+    "Ruvox",
+    "Boltor",
+    "Hate",
+    "Sibear",
+    "Braton",
+    "Innodem",
+    "Sicarus",
+    "Bronco",
+    "Kunai",
+    "Skana",
+    "Burston",
+    "Laetum",
+    "Soma",
+    "Dagues céramique",
+    "Lato",
+    "Strun",
+    "Cestra",
+    "Latron",
+    "Sybaris",
+    "Dera",
+    "Lex",
+    "Thalys",
+    "Despair",
+    "Magistar",
+    "Torid",
+    "Dread",
+    "Miter",
+    "Vasto",
+    "Doubles Ichor",
+    "Nami Solo",
+    "Zylok"
+  ],
+  "evolutionsZariman": [
+    "Ferlarx",
+    "Innodem",
+    "Laetum",
+    "Phenmor",
+    "Praedos"
+  ],
+  "incarnonRotation": {
+    "1": [
+      "Braton",
+      "Lato",
+      "Skana",
+      "Paris",
+      "Kunai"
+    ],
+    "2": [
+      "Boar",
+      "Gammacor",
+      "Angstrum",
+      "Gorgon",
+      "Anku"
+    ],
+    "3": [
+      "Bo",
+      "Latron",
+      "Furis",
+      "Furax",
+      "Strun"
+    ],
+    "4": [
+      "Lex",
+      "Magistar",
+      "Boltor",
+      "Bronco",
+      "Dagues céramique"
+    ],
+    "5": [
+      "Torid",
+      "doubles Toxocyst",
+      "Dual Ichor",
+      "Miter",
+      "Atomos"
+    ],
+    "6": [
+      "Ack & Brunt",
+      "Soma",
+      "Vasto",
+      "Nami Solo",
+      "Burston"
+    ],
+    "7": [
+      "Zylok",
+      "Sibear",
+      "Dread",
+      "Despair",
+      "Hate"
+    ],
+    "8": [
+      "Dera",
+      "Sybaris",
+      "Cestra",
+      "Sicarus",
+      "Okina"
+    ]
+  },
+  "warframeRotation": {
+    "1": [
+      "Excalibur",
+      "Trinity",
+      "Ember"
+    ],
+    "2": [
+      "Loki",
+      "Mag",
+      "Rhino"
+    ],
+    "3": [
+      "Ash",
+      "Frost",
+      "Nyx"
+    ],
+    "4": [
+      "Saryn",
+      "Vauban",
+      "Nova"
+    ],
+    "5": [
+      "Nekros",
+      "Valkyr",
+      "Oberon"
+    ],
+    "6": [
+      "Hydroid",
+      "Mirage",
+      "Limbo"
+    ],
+    "7": [
+      "Mesa",
+      "Chroma",
+      "Atlas"
+    ],
+    "8": [
+      "Ivara",
+      "Inaros",
+      "Titania"
+    ],
+    "9": [
+      "Nidus",
+      "Octavia",
+      "Harrow"
+    ],
+    "10": [
+      "Gara",
+      "Khora",
+      "Revenant"
+    ],
+    "11": [
+      "Garuda",
+      "Baruuk",
+      "Hildryn"
+    ]
+  }
+}

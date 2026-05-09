@@ -1,0 +1,98 @@
+"use client";
+import { useEffect, useState } from "react";
+import incarnonData from "@/data/incarnon.json";
+import { useChecklist } from "@/lib/storage";
+import { currentIncarnonWeek } from "@/lib/rotation";
+
+export default function IncarnonPage() {
+  const data = incarnonData as {
+    evolutions: string[];
+    evolutionsZariman: string[];
+    incarnonRotation: Record<string, string[]>;
+  };
+  const checklist = useChecklist("incarnon");
+  const [week, setWeek] = useState<number | null>(null);
+
+  useEffect(() => {
+    setWeek(currentIncarnonWeek(new Date()));
+  }, []);
+
+  const renderItem = (name: string, prefix: string) => {
+    const id = `${prefix}:${name}`;
+    const done = !!checklist.state[id];
+    return (
+      <button
+        key={id}
+        onClick={() => checklist.toggle(id)}
+        className={`text-left p-2 rounded border transition flex items-center gap-2 ${
+          done
+            ? "bg-done/10 border-done/40 text-done"
+            : "bg-panel-2 border-border hover:border-accent"
+        }`}
+      >
+        <span
+          className={`w-3.5 h-3.5 rounded-sm border flex-shrink-0 ${
+            done ? "bg-done border-done" : "border-muted"
+          }`}
+        />
+        <span className="text-sm">{name}</span>
+      </button>
+    );
+  };
+
+  return (
+    <div className="space-y-6">
+      <header>
+        <h1 className="text-2xl font-bold">Incarnon</h1>
+        <p className="text-muted text-sm">
+          Évolutions débloquées + rotation hebdomadaire des adaptateurs.
+        </p>
+      </header>
+
+      <section className="bg-panel border border-border rounded-lg p-4">
+        <h2 className="font-semibold mb-3">Rotation des adaptateurs (8 semaines)</h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {Object.entries(data.incarnonRotation).map(([w, list]) => {
+            const isCurrent = week === parseInt(w, 10);
+            return (
+              <div
+                key={w}
+                className={`p-3 rounded border ${
+                  isCurrent
+                    ? "bg-accent/10 border-accent"
+                    : "bg-panel-2 border-border"
+                }`}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-semibold">Semaine {w}</span>
+                  {isCurrent && (
+                    <span className="text-xs text-accent">EN COURS</span>
+                  )}
+                </div>
+                <div className="space-y-1">
+                  {list.map((n) => renderItem(n, `rot:${w}`))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="bg-panel border border-border rounded-lg p-4">
+        <h2 className="font-semibold mb-3">
+          Évolutions débloquées ({data.evolutions.length})
+        </h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+          {data.evolutions.map((n) => renderItem(n, "evo"))}
+        </div>
+      </section>
+
+      <section className="bg-panel border border-border rounded-lg p-4">
+        <h2 className="font-semibold mb-3">Zariman</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+          {data.evolutionsZariman.map((n) => renderItem(n, "zariman"))}
+        </div>
+      </section>
+    </div>
+  );
+}
