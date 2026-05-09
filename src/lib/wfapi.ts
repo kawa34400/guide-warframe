@@ -74,8 +74,8 @@ export type Nightwave = {
 };
 
 async function fetchJson<T>(path: string): Promise<T> {
-  const sep = path.includes("?") ? "&" : "?";
-  const r = await fetch(`/api/wf/${PLATFORM}/${path}${sep}language=${LANG}`);
+  const fullPath = `${PLATFORM}/${path}`;
+  const r = await fetch(`/api/wf?p=${encodeURIComponent(fullPath)}&language=${LANG}`);
   if (!r.ok) throw new Error(`wfapi ${path}: ${r.status}`);
   return r.json();
 }

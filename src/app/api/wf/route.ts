@@ -1,20 +1,26 @@
 // Server-side proxy for https://api.warframestat.us — adds caching and CORS-free access.
-// Usage: GET /api/wf/pc/sortie?language=fr → fetches https://api.warframestat.us/pc/sortie?language=fr
+// Usage: /api/wf?p=pc/sortie&language=fr → fetches https://api.warframestat.us/pc/sortie?language=fr
 import { NextRequest } from "next/server";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-export async function GET(
-  req: NextRequest,
-  ctx: { params: Promise<{ path: string[] }> },
-) {
-  const { path } = await ctx.params;
-  if (!path || path.length === 0) {
-    return Response.json({ error: "missing_path" }, { status: 400 });
+export async function GET(req: NextRequest) {
+  const url = req.nextUrl;
+  const p = url.searchParams.get("p");
+  if (!p) {
+    return Response.json({ error: "missing_p_param" }, { status: 400 });
   }
-  const search = req.nextUrl.search;
-  const upstream = `https://api.warframestat.us/${path.join("/")}${search}`;
+  // Security: only allow alphanum + slashes (no .. traversal, no protocol)
+  if (!/^[a-zA-Z0-9/_-]+$/.test(p)) {
+    return Response.json({ error: "invalid_path" }, { status: 400 });
+  }
+
+  // Forward all other query params (e.g. language=fr)
+  const forwarded = new URLSearchParams(url.searchParams);
+  forwarded.delete("p");
+  const qs = forwarded.toString();
+  const upstream = `https://api.warframestat.us/${p}${qs ? `?${qs}` : ""}`;
 
   try {
     const res = await fetch(upstream, {
