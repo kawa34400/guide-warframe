@@ -1,0 +1,60 @@
+name: Build Overlay (Tauri)
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build for Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - name: Install npm deps
+        run: npm ci
+
+      - name: Build Tauri app
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: "Guide Warframe Overlay ${{ github.ref_name }}"
+          releaseBody: |
+            ## Installation
+
+            Télécharge le `.exe` ou le `.msi` ci-dessous et exécute-le.
+
+            ## Raccourcis
+
+            - **F8** : afficher / masquer la fenêtre
+            - **Ctrl+F8** : toggle click-through (les clics traversent vers le jeu)
+
+            ## Notes
+
+            - L'overlay charge `https://guide-warframe.vercel.app` — la mise à jour se fait automatiquement à chaque déploiement Vercel
+            - Position et taille mémorisées entre lancements
+            - Auth Supabase persistante (= ta progression sync)
+          releaseDraft: false
+          prerelease: false
+          includeUpdaterJson: false
+          args: ""

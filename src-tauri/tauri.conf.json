@@ -1,0 +1,55 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Guide Warframe Overlay",
+  "version": "0.1.0",
+  "identifier": "com.kawa34400.guide-warframe-overlay",
+  "build": {
+    "beforeDevCommand": "",
+    "devUrl": "https://guide-warframe.vercel.app",
+    "frontendDist": "../public"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Guide Warframe",
+        "url": "https://guide-warframe.vercel.app",
+        "width": 480,
+        "height": 720,
+        "minWidth": 320,
+        "minHeight": 400,
+        "resizable": true,
+        "decorations": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": false,
+        "focus": true,
+        "transparent": false,
+        "visible": true,
+        "shadow": false,
+        "center": false
+      }
+    ],
+    "security": {
+      "csp": null,
+      "dangerousDisableAssetCspModification": true
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis", "msi"],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.ico",
+      "icons/icon.png"
+    ],
+    "category": "Game",
+    "shortDescription": "Warframe overlay",
+    "longDescription": "Lightweight always-on-top wrapper around guide-warframe.vercel.app — toggle with F8."
+  },
+  "plugins": {
+    "global-shortcut": {},
+    "window-state": {}
+  }
+}

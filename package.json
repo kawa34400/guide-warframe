@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "parse": "node scripts/parse-csv.mjs",
-    "icons": "node scripts/gen-icons.mjs"
+    "icons": "node scripts/gen-icons.mjs",
+    "icons:tauri": "node scripts/gen-tauri-icons.mjs",
+    "tauri": "tauri"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.105.4",
@@ -18,6 +20,8 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.0",
+    "@tauri-apps/api": "^2.11.0",
+    "@tauri-apps/cli": "^2.11.1",
     "@types/node": "22.10.5",
     "@types/react": "19.0.7",
     "@types/react-dom": "19.0.3",
