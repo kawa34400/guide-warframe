@@ -2,13 +2,16 @@
 import { useEffect, useState } from "react";
 import incarnonData from "@/data/incarnon.json";
 import { useChecklist } from "@/lib/storage";
+import { useNotes } from "@/lib/notes";
 import { currentWarframeWeek } from "@/lib/rotation";
+import NoteButton from "@/components/NoteButton";
 
 export default function WarframesPage() {
   const data = incarnonData as {
     warframeRotation: Record<string, string[]>;
   };
   const checklist = useChecklist("warframes");
+  const notes = useNotes("warframes");
   const [week, setWeek] = useState<number | null>(null);
 
   useEffect(() => {
@@ -37,7 +40,11 @@ export default function WarframesPage() {
               }`}
             >
               <div className="flex items-center justify-between mb-2">
-                <span className={`font-display tracking-wider uppercase text-sm ${isCurrent ? "text-accent text-glow" : ""}`}>
+                <span
+                  className={`font-display tracking-wider uppercase text-sm ${
+                    isCurrent ? "text-accent text-glow" : ""
+                  }`}
+                >
                   Semaine {w}
                 </span>
                 {isCurrent && (
@@ -51,22 +58,35 @@ export default function WarframesPage() {
                   const id = `wf:${n}`;
                   const done = !!checklist.state[id];
                   return (
-                    <button
+                    <div
                       key={id}
-                      onClick={() => checklist.toggle(id)}
-                      className={`w-full text-left p-2 rounded border transition flex items-center gap-2 ${
+                      className={`relative flex items-stretch rounded border transition ${
                         done
-                          ? "bg-done/10 border-done/40 text-done"
+                          ? "bg-done/10 border-done/40"
                           : "bg-panel-2 border-border hover:border-accent"
                       }`}
                     >
-                      <span
-                        className={`w-3.5 h-3.5 rounded-sm border flex-shrink-0 ${
-                          done ? "bg-done border-done" : "border-muted"
+                      <button
+                        onClick={() => checklist.toggle(id)}
+                        className={`flex-1 text-left p-2 flex items-center gap-2 ${
+                          done ? "text-done" : ""
                         }`}
+                      >
+                        <span
+                          className={`w-3.5 h-3.5 rounded-sm border flex-shrink-0 ${
+                            done ? "bg-done border-done" : "border-muted"
+                          }`}
+                        />
+                        <span className="text-sm">{n}</span>
+                      </button>
+                      <NoteButton
+                        itemId={id}
+                        itemLabel={n}
+                        body={notes.get(id)}
+                        onSave={(b) => notes.save(id, b)}
+                        className="self-center mr-1"
                       />
-                      <span className="text-sm">{n}</span>
-                    </button>
+                    </div>
                   );
                 })}
               </div>

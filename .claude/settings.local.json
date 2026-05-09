@@ -55,7 +55,8 @@
       "Bash(curl -s \"https://api.warframestat.us/pc/?language=fr\")",
       "Bash(git commit -m 'feat: Phase 1 — Today page, stats, search, export/import, Live++ *)",
       "Bash(curl -s \"https://guide-warframe.vercel.app/api/wf?p=pc/arbitration&language=fr\")",
-      "Bash(git commit -m 'fix\\(live\\): show empty state for arbitration placeholder *)"
+      "Bash(git commit -m 'fix\\(live\\): show empty state for arbitration placeholder *)",
+      "Bash(git commit -m 'feat\\(notes\\): notes per item with Supabase sync *)"
     ]
   }
 }

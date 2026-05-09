@@ -2,6 +2,8 @@
 import { useMemo, useState } from "react";
 import construction from "@/data/construction.json";
 import { useChecklist } from "@/lib/storage";
+import { useNotes } from "@/lib/notes";
+import NoteButton from "@/components/NoteButton";
 
 type Pair = {
   resource: { name: string; source: string | null } | null;
@@ -37,32 +39,49 @@ function WeaponCheck({
   source,
   done,
   onToggle,
+  noteBody,
+  onSaveNote,
 }: {
   id: string;
   name: string;
   source: string | null;
   done: boolean;
   onToggle: (id: string) => void;
+  noteBody: string;
+  onSaveNote: (body: string) => void | Promise<void>;
 }) {
   return (
-    <button
-      onClick={() => onToggle(id)}
-      className={`flex flex-col gap-1 w-full text-left p-2 rounded border transition ${
+    <div
+      className={`relative flex items-stretch rounded border transition ${
         done
-          ? "bg-done/10 border-done/40 text-done"
+          ? "bg-done/10 border-done/40"
           : "bg-panel-2 border-border hover:border-accent"
       }`}
     >
-      <div className="flex items-center gap-2">
-        <span
-          className={`w-3.5 h-3.5 rounded-sm border flex-shrink-0 ${
-            done ? "bg-done border-done" : "border-muted"
-          }`}
-        />
-        <span className="text-sm font-medium truncate">{name}</span>
-      </div>
-      <SourceTag src={source} />
-    </button>
+      <button
+        onClick={() => onToggle(id)}
+        className={`flex-1 flex flex-col gap-1 text-left p-2 ${
+          done ? "text-done" : ""
+        }`}
+      >
+        <div className="flex items-center gap-2">
+          <span
+            className={`w-3.5 h-3.5 rounded-sm border flex-shrink-0 ${
+              done ? "bg-done border-done" : "border-muted"
+            }`}
+          />
+          <span className="text-sm font-medium truncate">{name}</span>
+        </div>
+        <SourceTag src={source} />
+      </button>
+      <NoteButton
+        itemId={id}
+        itemLabel={name}
+        body={noteBody}
+        onSave={onSaveNote}
+        className="self-start mt-1.5 mr-1"
+      />
+    </div>
   );
 }
 
@@ -71,6 +90,7 @@ export default function ConstructionPage() {
   const [filter, setFilter] = useState("");
   const [hideDone, setHideDone] = useState(false);
   const checklist = useChecklist("construction");
+  const notes = useNotes("construction");
 
   const sections = useMemo(() => {
     const f = filter.toLowerCase().trim();
@@ -145,6 +165,8 @@ export default function ConstructionPage() {
                       source={p.resource.source}
                       done={!!checklist.state[rid]}
                       onToggle={checklist.toggle}
+                      noteBody={notes.get(rid)}
+                      onSaveNote={(b) => notes.save(rid, b)}
                     />
                   ) : (
                     <div />
@@ -159,6 +181,8 @@ export default function ConstructionPage() {
                       source={p.built.source}
                       done={!!checklist.state[bid]}
                       onToggle={checklist.toggle}
+                      noteBody={notes.get(bid)}
+                      onSaveNote={(b) => notes.save(bid, b)}
                     />
                   ) : (
                     <div />
