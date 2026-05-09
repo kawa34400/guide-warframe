@@ -10,7 +10,7 @@ import {
 type Props = {
   open: boolean;
   itemLabel: string;
-  itemType: "Kuva" | "Tenet" | "Hound";
+  itemType: "Kuva" | "Tenet" | "Coda" | "Hound";
   meta: LichMeta;
   onSave: (m: LichMeta) => void | Promise<void>;
   onClose: () => void;

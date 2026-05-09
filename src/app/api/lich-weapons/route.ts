@@ -55,6 +55,16 @@ export async function GET(req: NextRequest) {
         type: "Tenet",
       }));
 
+    const coda = all
+      .filter((w) => /\/InfestedLich\//.test(w.uniqueName))
+      .map((w) => ({
+        uniqueName: w.uniqueName,
+        name: w.name,
+        category: w.category,
+        masteryReq: w.masteryReq ?? 0,
+        type: "Coda",
+      }));
+
     const hounds = HOUNDS.map((h) => ({
       uniqueName: h.uniqueName,
       name: h.name,
@@ -63,7 +73,7 @@ export async function GET(req: NextRequest) {
       type: "Hound",
     }));
 
-    return Response.json([...kuva, ...tenet, ...hounds], {
+    return Response.json([...kuva, ...tenet, ...coda, ...hounds], {
       headers: {
         "cache-control": "public, s-maxage=3600, stale-while-revalidate=86400",
       },

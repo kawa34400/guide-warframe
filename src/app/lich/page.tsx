@@ -4,6 +4,7 @@ import {
   useLichWeapons,
   useLichMeta,
   ELEMENT_COLORS,
+  LICH_TYPES,
   type LichWeapon,
   type Element,
 } from "@/lib/lich";
@@ -13,6 +14,7 @@ import LichEditModal from "@/components/LichEditModal";
 const TYPE_COLOR: Record<string, string> = {
   Kuva: "border-faction-grineer/40 text-faction-grineer",
   Tenet: "border-faction-corpus/40 text-faction-corpus",
+  Coda: "border-faction-infested/40 text-faction-infested",
   Hound: "border-tier-omnia/40 text-tier-omnia",
 };
 
@@ -22,9 +24,9 @@ export default function LichPage() {
   const meta = useLichMeta();
 
   const [filter, setFilter] = useState("");
-  const [typeFilter, setTypeFilter] = useState<"all" | "Kuva" | "Tenet" | "Hound">(
-    "all",
-  );
+  const [typeFilter, setTypeFilter] = useState<
+    "all" | "Kuva" | "Tenet" | "Coda" | "Hound"
+  >("all");
   const [hideOwned, setHideOwned] = useState(false);
   const [editing, setEditing] = useState<LichWeapon | null>(null);
 
@@ -48,6 +50,7 @@ export default function LichPage() {
     const s: Record<string, { done: number; total: number }> = {
       Kuva: { done: 0, total: 0 },
       Tenet: { done: 0, total: 0 },
+      Coda: { done: 0, total: 0 },
       Hound: { done: 0, total: 0 },
     };
     for (const it of items) {
@@ -68,15 +71,15 @@ export default function LichPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-bold">Lich &amp; Sister</h1>
+        <h1 className="text-2xl font-bold">Lich · Sister · Coda</h1>
         <p className="text-muted text-sm">
           {loading
             ? "Chargement..."
-            : `${totalAll} armes : ${stats.Kuva.total} Kuva · ${stats.Tenet.total} Tenet · ${stats.Hound.total} Hounds`}
+            : `${totalAll} entrées : ${stats.Kuva.total} Kuva · ${stats.Tenet.total} Tenet · ${stats.Coda.total} Coda · ${stats.Hound.total} Hounds`}
         </p>
       </header>
 
-      <section className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+      <section className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
         <button
           onClick={() => setTypeFilter("all")}
           className={`panel notch p-3 text-left ${
@@ -89,13 +92,13 @@ export default function LichPage() {
             <span className="text-sm text-muted">/{totalAll}</span>
           </div>
         </button>
-        {(["Kuva", "Tenet", "Hound"] as const).map((t) => {
-          const s = stats[t];
-          const active = typeFilter === t;
+        {LICH_TYPES.map(({ type, label, sub }) => {
+          const s = stats[type];
+          const active = typeFilter === type;
           return (
             <button
-              key={t}
-              onClick={() => setTypeFilter(active ? "all" : t)}
+              key={type}
+              onClick={() => setTypeFilter(active ? "all" : type)}
               className={`panel notch p-3 text-left ${
                 active ? "border-accent/60" : ""
               }`}
@@ -105,8 +108,9 @@ export default function LichPage() {
                   active ? "text-accent" : "text-muted"
                 }`}
               >
-                {t}
+                {label}
               </div>
+              <div className="text-[10px] text-muted/70 mb-1">{sub}</div>
               <div className="font-display text-xl">
                 {s.done}
                 <span className="text-sm text-muted">/{s.total}</span>

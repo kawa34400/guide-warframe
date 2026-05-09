@@ -7,8 +7,15 @@ export type LichWeapon = {
   name: string;
   category: string;
   masteryReq: number;
-  type: "Kuva" | "Tenet" | "Hound";
+  type: "Kuva" | "Tenet" | "Coda" | "Hound";
 };
+
+export const LICH_TYPES: { type: LichWeapon["type"]; label: string; sub: string }[] = [
+  { type: "Kuva", label: "Kuva Lich", sub: "Grineer" },
+  { type: "Tenet", label: "Tenet", sub: "Sister of Parvos" },
+  { type: "Coda", label: "Coda", sub: "Infested · Technocyte" },
+  { type: "Hound", label: "Hounds", sub: "Compagnons (Sister drop)" },
+];
 
 export const ELEMENTS = [
   "Heat",
