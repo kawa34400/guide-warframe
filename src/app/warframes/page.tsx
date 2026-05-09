@@ -5,6 +5,7 @@ import { useChecklist } from "@/lib/storage";
 import { useNotes } from "@/lib/notes";
 import { currentWarframeWeek } from "@/lib/rotation";
 import NoteButton from "@/components/NoteButton";
+import MarketBadge from "@/components/MarketBadge";
 
 export default function WarframesPage() {
   const data = incarnonData as {
@@ -79,6 +80,7 @@ export default function WarframesPage() {
                         />
                         <span className="text-sm">{n}</span>
                       </button>
+                      <MarketBadge name={n} className="self-center mr-1" />
                       <NoteButton
                         itemId={id}
                         itemLabel={n}

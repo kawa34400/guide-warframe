@@ -4,6 +4,7 @@ import construction from "@/data/construction.json";
 import { useChecklist } from "@/lib/storage";
 import { useNotes } from "@/lib/notes";
 import NoteButton from "@/components/NoteButton";
+import MarketBadge from "@/components/MarketBadge";
 
 type Pair = {
   resource: { name: string; source: string | null } | null;
