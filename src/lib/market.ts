@@ -142,26 +142,32 @@ export function useMarketPrice(name: string, eager = false) {
   );
   const [loading, setLoading] = useState(false);
   const [tried, setTried] = useState(false);
-  const cancelledRef = useRef(false);
-
   const [error, setError] = useState<string | null>(null);
+  const startedRef = useRef(false);
 
   const load = useCallback(async () => {
-    if (loading || tried) return;
+    if (startedRef.current) return;
+    startedRef.current = true;
     setLoading(true);
     setError(null);
-    cancelledRef.current = false;
     try {
       const slugs = await loadSlugSet();
       if (slugs.size === 0) {
-        setError("catalogue vide");
+        setError("catalogue vide (API down ?)");
         return;
       }
       const allCandidates = candidateSlugs(name);
       const candidates = allCandidates.filter((s) => slugs.has(s));
       if (process.env.NODE_ENV !== "production") {
         // eslint-disable-next-line no-console
-        console.log("[market]", name, "tried:", allCandidates, "matched:", candidates);
+        console.log(
+          "[market]",
+          name,
+          "tried:",
+          allCandidates,
+          "matched:",
+          candidates,
+        );
       }
       if (candidates.length === 0) {
         setError("pas sur le market");
@@ -169,7 +175,6 @@ export function useMarketPrice(name: string, eager = false) {
       }
       for (const slug of candidates) {
         const s = await fetchStats(slug);
-        if (cancelledRef.current) return;
         if (s) {
           setData({ slug, stats: s });
           return;
@@ -179,18 +184,13 @@ export function useMarketPrice(name: string, eager = false) {
     } catch (e) {
       setError(String(e));
     } finally {
-      if (!cancelledRef.current) {
-        setLoading(false);
-        setTried(true);
-      }
+      setLoading(false);
+      setTried(true);
     }
-  }, [name, loading, tried]);
+  }, [name]);
 
   useEffect(() => {
     if (eager) load();
-    return () => {
-      cancelledRef.current = true;
-    };
   }, [eager, load]);
 
   return { data, loading, tried, error, load };
