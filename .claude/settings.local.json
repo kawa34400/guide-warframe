@@ -132,7 +132,10 @@
       "Bash(curl -sL \"https://api.warframestat.us/pc/cetusCycle?language=fr\")",
       "Bash(curl -sL \"https://api.warframestat.us/pc/cetusCycle\")",
       "Bash(curl -s \"https://guide-warframe.vercel.app/api/wf?p=pc/cetusCycle&language=fr&_=$\\(date +%s\\)\")",
-      "Bash(curl -s \"https://guide-warframe.vercel.app/api/wf?p=pc/sortie&language=fr&_=$\\(date +%s\\)\")"
+      "Bash(curl -s \"https://guide-warframe.vercel.app/api/wf?p=pc/sortie&language=fr&_=$\\(date +%s\\)\")",
+      "Bash(curl -sI \"https://github.com/kawa34400/guide-warframe/releases/download/v0.2.0/Guide.Warframe.Overlay_0.2.0_x64-setup.exe\")",
+      "Bash(curl -s \"https://api.github.com/repos/kawa34400/guide-warframe/releases/tags/v0.2.0\")",
+      "Bash(curl -s \"https://api.github.com/repos/kawa34400/guide-warframe/actions/runs?per_page=5\")"
     ]
   }
 }

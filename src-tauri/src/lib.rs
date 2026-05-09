@@ -13,8 +13,24 @@ fn toggle_visibility(window: &WebviewWindow) {
 
 struct ClickThroughState(std::sync::Mutex<bool>);
 
+fn log(msg: &str) {
+    use std::io::Write;
+    let path = dirs_next::data_dir()
+        .unwrap_or_else(|| std::path::PathBuf::from("."))
+        .join("guide-warframe-overlay")
+        .join("crash.log");
+    if let Some(parent) = path.parent() {
+        let _ = std::fs::create_dir_all(parent);
+    }
+    if let Ok(mut f) = std::fs::OpenOptions::new().create(true).append(true).open(&path) {
+        let now = chrono::Local::now().to_rfc3339();
+        let _ = writeln!(f, "[{now}] {msg}");
+    }
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    log("run() entered");
     tauri::Builder::default()
         .manage(ClickThroughState(std::sync::Mutex::new(false)))
         .plugin(tauri_plugin_window_state::Builder::default().build())
@@ -43,12 +59,12 @@ pub fn run() {
                 .build(),
         )
         .setup(|app| {
-            // Best-effort hotkey registration; ignore errors so the app still
-            // launches if F8 is already taken by another process.
+            log("setup() entered");
             let f8 = Shortcut::new(None, Code::F8);
             let ctrl_f8 = Shortcut::new(Some(Modifiers::CONTROL), Code::F8);
             let _ = app.global_shortcut().register(f8);
             let _ = app.global_shortcut().register(ctrl_f8);
+            log("setup() done");
             Ok(())
         })
         .run(tauri::generate_context!())
