@@ -10,6 +10,7 @@ const links = [
   { href: "/incarnon", label: "Incarnon" },
   { href: "/warframes", label: "Warframes" },
   { href: "/mastery", label: "Mastery" },
+  { href: "/helminth", label: "Helminth" },
   { href: "/live", label: "Live" },
   { href: "/team", label: "Équipe" },
 ];

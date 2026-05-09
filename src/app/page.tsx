@@ -183,6 +183,11 @@ export default function Home() {
             accent
           />
           <SectionTile
+            href="/helminth"
+            title="Helminth"
+            desc="Frames subsumées + abilities"
+          />
+          <SectionTile
             href="/settings"
             title="Paramètres"
             desc="Sauvegarde / Import"
