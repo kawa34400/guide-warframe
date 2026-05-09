@@ -1,0 +1,37 @@
+{
+  "name": "Guide Warframe",
+  "short_name": "Warframe",
+  "description": "Tracker progression Warframe — construction, Incarnon, rotations, live",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0b0f14",
+  "theme_color": "#0b0f14",
+  "lang": "fr",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    { "name": "Live", "url": "/live" },
+    { "name": "Incarnon", "url": "/incarnon" },
+    { "name": "Équipe", "url": "/team" }
+  ]
+}
