@@ -119,6 +119,7 @@ function Drawer({
     { href: "/warframes", label: "Warframes" },
     { href: "/mastery", label: "Mastery Rank" },
     { href: "/helminth", label: "Helminth" },
+    { href: "/lich", label: "Lich & Sister" },
     { href: "/team", label: "Équipe" },
     { href: "/settings", label: "Paramètres" },
   ];

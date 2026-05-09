@@ -188,6 +188,11 @@ export default function Home() {
             desc="Frames subsumées + abilities"
           />
           <SectionTile
+            href="/lich"
+            title="Lich & Sister"
+            desc="Kuva · Tenet · Hounds + bonus %"
+          />
+          <SectionTile
             href="/settings"
             title="Paramètres"
             desc="Sauvegarde / Import"
