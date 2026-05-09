@@ -33,8 +33,10 @@ export async function GET(req: NextRequest) {
     }
     const all = (await r.json()) as RawWeapon[];
 
+    // Filter by uniqueName path (stable across locales), since the FR translation
+    // moves "Kuva" to suffix and renames Tenet → "Principe".
     const kuva = all
-      .filter((w) => w.name?.startsWith("Kuva "))
+      .filter((w) => /\/KuvaLich\//.test(w.uniqueName))
       .map((w) => ({
         uniqueName: w.uniqueName,
         name: w.name,
@@ -44,7 +46,7 @@ export async function GET(req: NextRequest) {
       }));
 
     const tenet = all
-      .filter((w) => w.name?.startsWith("Tenet "))
+      .filter((w) => /\/BoardExec\//.test(w.uniqueName))
       .map((w) => ({
         uniqueName: w.uniqueName,
         name: w.name,
